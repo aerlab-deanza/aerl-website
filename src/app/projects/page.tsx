@@ -1,6 +1,8 @@
 import { PageHeader } from "@/components/layout/PageHeader"
 import { SectionWrapper } from "@/components/layout/SectionWrapper"
 import { ProjectCard } from "@/components/cards/ProjectCard"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { featuredProjects } from "@/lib/data"
 
 export default function ProjectsPage() {
@@ -12,12 +14,34 @@ export default function ProjectsPage() {
       <SectionWrapper className="pb-8">
         <PageHeader
           title="Projects"
-          description="Two active engineering efforts this cycle, and one longer-term direction they're building toward. Everything is in-progress, tracked on the roadmap, and documented as we go."
+          description="Public-facing project summaries live here. Deep technical material, validation details, theory, and logs now live in the integrated documentation section."
         />
       </SectionWrapper>
 
-      {/* Active Projects */}
       <SectionWrapper className="pt-0">
+        <div className="aerl-grid-panel mb-10 p-6 md:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <div>
+              <p className="aerl-kicker">Flagship Project Hub</p>
+              <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Flight Control System documentation</h2>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+                The FCS hub is the technical backbone of the site: project overview, technical approach, theory, timeline, committee ownership, and the running log of validation work.
+              </p>
+            </div>
+            <div className="grid gap-3 text-sm">
+              <Link href="/documentation/projects/fcs" className="aerl-action-link justify-between">
+                FCS overview <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/documentation/projects/fcs/technical-approach" className="aerl-action-link justify-between">
+                Technical approach <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/documentation/projects/fcs/timeline-validation" className="aerl-action-link justify-between">
+                Timeline and validation <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-6">
             <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-500">

@@ -1,0 +1,98 @@
+# Timeline and Validation
+
+## Phase plan
+
+### Phase 1: Design and Procurement
+
+- finalize the component list and bill of materials
+- order the frame, motors, ESCs, Teensy, IMU, battery, and accessories
+- set up Git and PlatformIO
+- draft architecture and block diagrams
+- assign committee responsibilities
+
+### Phase 2: Hardware Build
+
+- assemble the airframe and mount motors
+- install ESCs and route power wiring
+- mount the Teensy and sensor board
+- complete the wiring harness
+- perform a bench power-on test
+
+### Phase 3: Firmware Development
+
+- implement IMU reads and RC input parsing
+- implement attitude estimation
+- implement PID loops for roll, pitch, and yaw
+- implement motor mixing and ESC outputs
+- validate firmware on the bench with props removed
+
+### Phase 4: Initial Flight Testing
+
+- conduct tethered hover tests
+- log attitude, motor outputs, and PID error data
+- tune gains iteratively
+- validate attitude hold under disturbances
+
+### Phase 5: PID Tuning and Validation
+
+- fine-tune gains from flight data
+- run step response tests on roll, pitch, and yaw
+- characterize disturbance rejection
+- record final gains and measured performance
+
+### Phase 6: Documentation and Handoff
+
+- populate core documentation pages
+- record and annotate flight test videos
+- publish final code and parameter sheets
+- hold a lessons-learned debrief
+
+## Gantt summary
+
+| Task | W1 | W2 | W3 | W4 | W5 | W6 | W7 | W8 | W9 | W10 | W11 | W12 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Design and procurement | X | X |  |  |  |  |  |  |  |  |  |  |
+| Hardware build |  |  | X | X |  |  |  |  |  |  |  |  |
+| Firmware development |  |  |  |  | X | X | X |  |  |  |  |  |
+| Initial flight test |  |  |  |  |  |  |  | X | X |  |  |  |
+| PID tuning |  |  |  |  |  |  |  |  |  | X | X |  |
+| Documentation |  |  |  |  |  |  |  |  |  |  |  | X |
+
+## Functional requirements
+
+- stable, controlled hover for at least 30 seconds
+- roll and pitch attitude error under +/-2 deg during steady hover
+- yaw drift under +/-5 deg per minute without correction
+- RC input response within 100 ms
+- PID loops running at a minimum of 250 Hz
+- motor outputs generated with less than 1 ms latency from sensor read
+
+## Performance requirements
+
+| Metric | Target | Measurement method |
+| --- | --- | --- |
+| Hover stability | Under +/-2 deg | IMU log analysis |
+| Step response settling time | Under 1 s | Step input test plus logs |
+| Step response overshoot | Under 15 percent | Step input test plus logs |
+| PID loop frequency | Above 250 Hz | Timer measurement in firmware |
+| Battery life at hover | Above 8 minutes | Flight test stopwatch |
+| Thrust-to-weight ratio | Above 2:1 | Thrust stand measurement |
+
+## Validation status
+
+| Test | Pass criterion | Status |
+| --- | --- | --- |
+| Simulated roll step response | Settling under 1 s, overshoot under 15 percent | Pending |
+| Simulated pitch step response | Settling under 1 s, overshoot under 15 percent | Pending |
+| Simulated yaw step response | Settling under 2 s | Pending |
+| Disturbance rejection | Return to level within 2 s | Pending |
+| Hover trim | Under 0.5 percent throttle asymmetry | Pending |
+
+## Test results log
+
+| Date | Test | Result | Notes |
+| --- | --- | --- | --- |
+| TBD | IMU I2C comms | Pending | Verify device address and stable reads |
+| TBD | Complementary filter | Pending | Tune alpha and compare drift |
+| TBD | Motor PWM output | Pending | Confirm timing with an oscilloscope |
+| TBD | First bench run | Pending | Props removed, verify response |

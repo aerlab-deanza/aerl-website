@@ -12,9 +12,8 @@ interface TeamCardProps {
 }
 
 export function TeamCard({ name, description, icon, focusArea, roadmapSupport }: TeamCardProps) {
-  // Try to safely load the lucide icon. Next compiler can complain about dynamic lookups if we don't handle it well.
-  // We'll cast as an index lookup for simplicity here.
-  const IconComponent = (Icons as any)[icon] as LucideIcon || Icons.Users
+  const iconMap = Icons as unknown as Record<string, LucideIcon>
+  const IconComponent = iconMap[icon] ?? Icons.Users
 
   return (
     <div className="flex flex-col gap-3 rounded-lg border border-border/40 bg-card p-6 shadow-sm hover:border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full group">

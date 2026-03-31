@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/layout/PageHeader"
 import { SectionWrapper } from "@/components/layout/SectionWrapper"
+import { committeeModel, coreValues, labStats, leadershipTeam, missionPillars, technicalLeadOpenings, visionStatements } from "@/lib/site-content"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -9,72 +10,132 @@ export default function AboutPage() {
       <SectionWrapper className="pb-8">
         <PageHeader
           title="About AERL"
-          description="A student engineering lab at De Anza College. We build real systems, document them well, and leave behind work the next team can actually use."
+          description="A student engineering research lab at De Anza College. We derive models, simulate systems, build prototypes, and publish work the next cohort can continue."
         />
       </SectionWrapper>
 
       <SectionWrapper className="pt-0">
-        <div className="prose prose-neutral dark:prose-invert max-w-4xl prose-headings:tracking-tight prose-a:text-primary">
+        <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+          <div className="aerl-panel p-6 md:p-8">
+            <h2 className="font-heading text-3xl font-bold text-foreground">What AERL is</h2>
+            <p className="mt-4 text-base leading-8 text-muted-foreground">
+              AERL is where students build full-stack engineering systems. We start from first principles, derive
+              the equations, simulate the behavior, and then push the design into hardware, software, validation,
+              documentation, and handoff.
+            </p>
+            <p className="mt-4 text-base leading-8 text-muted-foreground">
+              The current flagship work is the Flight Control System project, but the lab is not defined by one
+              vehicle. The point is to understand why machines work, not just assemble them, and to leave behind
+              systems the next team can understand and extend.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/roadmap" className="aerl-action-link">
+                See the build cycle <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/documentation" className="aerl-action-link">
+                Open documentation <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
 
-          <h2>What AERL Is</h2>
-          <p>
-            AERL is a student-run engineering lab at De Anza College. We&apos;re not a traditional club. We don&apos;t do demos at fairs, collect dues, and call it a year. We scope a project, divide it into real engineering work, and try to actually finish it — hardware, simulation, documentation, and handoff included.
-          </p>
-          <p>
-            Our current direction is a quadcopter build from the ground up. That means two active efforts running in parallel: a physical drone build track and a simulation and controls track.
-          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {labStats.map((stat) => (
+              <div key={stat.label} className="aerl-panel p-5">
+                <p className="aerl-kicker">{stat.label}</p>
+                <p className="mt-3 font-heading text-4xl font-bold text-foreground">{stat.value}</p>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{stat.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </SectionWrapper>
 
-          <h2>Why We Exist</h2>
-          <p>
-            Most engineering students at community college don&apos;t have access to a serious technical environment between classes. Coursework teaches concepts. Clubs do light projects. Industry internships are competitive and often narrow.
-          </p>
-          <p>
-            AERL is trying to be the middle option: a place where you can do real engineering work alongside other students who take it seriously. The scale is small. The standards are high. The bar for joining isn&apos;t credentials — it&apos;s commitment.
-          </p>
+      <SectionWrapper className="pt-0">
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="aerl-panel p-6 md:p-8">
+            <p className="aerl-kicker">Mission</p>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
+              {missionPillars.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="aerl-panel p-6 md:p-8">
+            <p className="aerl-kicker">Vision</p>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
+              {visionStatements.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </SectionWrapper>
 
-          <h2>How We Work</h2>
-          <p>
-            We run on quarterly build cycles. Right now we&apos;re in Cycle 1 — a full-quarter effort to build and document a physical quadcopter while developing a simulation environment to validate flight control logic before it ever touches hardware.
-          </p>
-          <p>
-            The goal isn&apos;t just a drone that hovers. It&apos;s a drone that hovers <em>and</em> a GitHub repository and documentation set that a new team can clone, understand, and continue from. That distinction is what separates us from a generic club project.
-          </p>
+      <SectionWrapper className="pt-0">
+        <div className="mb-8 max-w-2xl">
+          <p className="aerl-kicker">Values</p>
+          <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">How the lab operates</h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {coreValues.map((value) => (
+            <div key={value.title} className="aerl-panel p-6">
+              <h3 className="font-heading text-2xl font-semibold text-foreground">{value.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">{value.summary}</p>
+            </div>
+          ))}
+        </div>
+      </SectionWrapper>
 
-          <h2>Engineering Culture</h2>
-          <p>We have a few working principles that aren&apos;t optional:</p>
-          <ul>
-            <li>
-              <strong>Write things down.</strong> If you tuned a PID parameter, document why. If something didn&apos;t work, log it. Institutional memory dies when people graduate and leave nothing behind. We&apos;re explicitly building against that.
-            </li>
-            <li>
-              <strong>Understand before you ship.</strong> We&apos;d rather move slower and understand something deeply than copy a solution you can&apos;t explain. First principles, always — but also with scope and pragmatism.
-            </li>
-            <li>
-              <strong>Design for handoff.</strong> Every cycle ends with a release: tagged code, updated documentation, a handoff summary. We design the work so the next team doesn&apos;t start from scratch.
-            </li>
-            <li>
-              <strong>Contribution areas, not hard silos.</strong> We have five areas where members contribute: controls & dynamics, simulation & software, electronics & power, hardware & fabrication, and documentation & operations. These are working groups — people often span more than one.
-            </li>
-          </ul>
+      <SectionWrapper className="pt-0">
+        <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
+          <div className="aerl-panel p-6 md:p-8">
+            <p className="aerl-kicker">Leadership Team</p>
+            <div className="mt-5 overflow-hidden rounded-2xl border border-border/70">
+              <table className="min-w-full text-left text-sm">
+                <tbody>
+                  {leadershipTeam.map((member) => (
+                    <tr key={`${member.role}-${member.name}`} className="border-b border-border/60 last:border-0">
+                      <th className="bg-background/35 px-4 py-3 font-semibold text-foreground">{member.role}</th>
+                      <td className="px-4 py-3 text-muted-foreground">{member.name}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-          <h2>What This Isn&apos;t</h2>
-          <p>
-            This isn&apos;t an aerospace company, a formal research lab, or a club with a polished legacy. We&apos;re early. We&apos;re building the culture and the systems simultaneously. If you want to join something that already has all the answers, AERL is probably not the right fit. If you want to help build whatever this becomes — read the roadmap and fill out the form.
-          </p>
-
-          <div className="not-prose mt-8 flex gap-4">
-            <Link
-              href="/roadmap"
-              className="inline-flex items-center text-sm font-semibold text-primary hover:underline"
-            >
-              See the current build cycle <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-            <Link
-              href="/join"
-              className="inline-flex items-center text-sm font-semibold text-primary hover:underline"
-            >
-              Join AERL <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
+          <div className="space-y-6">
+            <div className="aerl-panel p-6 md:p-8">
+              <p className="aerl-kicker">Lab Structure</p>
+              <div className="mt-4 space-y-4">
+                {committeeModel.map((committee) => (
+                  <div key={committee.name} className="rounded-2xl border border-border/60 bg-background/25 p-4">
+                    <h3 className="font-semibold text-foreground">{committee.name}</h3>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{committee.scope}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="aerl-panel p-6 md:p-8">
+              <p className="aerl-kicker">Open Technical Leads</p>
+              <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
+                {technicalLeadOpenings.map((role) => (
+                  <li key={role} className="flex gap-3">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>{role}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-sm leading-6 text-muted-foreground">
+                We are still filling final committee lead assignments and documenting the full roster by year and major.
+              </p>
+            </div>
           </div>
         </div>
       </SectionWrapper>

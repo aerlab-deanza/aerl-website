@@ -1,8 +1,11 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { SectionWrapper } from "@/components/layout/SectionWrapper"
+import { cn } from "@/lib/utils"
+
+const ctaLinkClasses =
+  "inline-flex h-12 items-center justify-center rounded-lg border border-transparent bg-primary px-8 text-base font-medium text-primary-foreground transition-all hover:bg-primary/85"
 
 interface CTAProps {
   title: string
@@ -20,10 +23,10 @@ export function CTA({ title, description, buttonText, buttonLink }: CTAProps) {
           {description}
         </p>
         <div className="pt-4">
-          <Button render={<Link href={buttonLink} />} size="lg" className="h-12 px-8 text-base">
+          <Link href={buttonLink} className={cn(ctaLinkClasses)}>
             {buttonText}
             <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          </Link>
         </div>
       </div>
     </SectionWrapper>

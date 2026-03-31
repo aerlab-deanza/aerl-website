@@ -38,6 +38,12 @@ function StatusBadge({ status }: { status: ProjectStatus }) {
 
 export function ProjectCard({ title, description, tags, link, status }: ProjectCardProps) {
   const isFuture = status === "Future Direction"
+  const isDocumentationLink = link.startsWith("/documentation")
+  const ctaLabel = isFuture
+    ? "Learn more"
+    : isDocumentationLink
+      ? "Open documentation"
+      : "View roadmap"
 
   return (
     <Card className={cn(
@@ -65,7 +71,7 @@ export function ProjectCard({ title, description, tags, link, status }: ProjectC
       </CardContent>
       <CardFooter>
         <Link href={link} className="inline-flex items-center text-sm font-medium text-primary hover:underline group-hover:font-semibold transition-all">
-          {isFuture ? "Learn more" : "View roadmap"} <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          {ctaLabel} <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </CardFooter>
     </Card>

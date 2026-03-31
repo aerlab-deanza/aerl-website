@@ -1,8 +1,18 @@
+import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
-};
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: ["remark-gfm"],
+  },
+});
 
-export default nextConfig;
+const nextConfig = {
+  reactCompiler: true,
+  pageExtensions: ["ts", "tsx", "md", "mdx"],
+  turbopack: {
+    root: process.cwd(),
+  },
+} satisfies NextConfig;
+
+export default withMDX(nextConfig);

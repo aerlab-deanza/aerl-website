@@ -1,0 +1,107 @@
+import { DocsLinkCard } from "@/components/docs/DocsLinkCard"
+import { StatCard } from "@/components/docs/StatCard"
+
+<div className="grid gap-8 xl:grid-cols-[1.02fr_0.98fr] xl:items-start">
+  <div>
+    <div className="aerl-kicker">Flight Control System Project</div>
+    <h1>Custom flight control from the ground up.</h1>
+    <div className="mt-5 text-[1.02rem] leading-8 text-muted-foreground">
+      The Flight Control System project is a student engineering initiative to design, build, and validate
+      a custom quadcopter flight control stack. The Teensy 4.1 microcontroller serves as the primary flight
+      controller, and the vehicle itself is a purpose-built test platform for real validation work.
+    </div>
+    <div className="mt-5 text-[1.02rem] leading-8 text-muted-foreground">
+      The goal is bigger than a single hover. This platform is meant to teach embedded systems, control theory,
+      state estimation, test discipline, and long-form technical handoff through a project that is ambitious
+      enough to matter.
+    </div>
+  </div>
+
+  <div className="grid gap-4 md:grid-cols-2">
+    <StatCard
+      label="Flight Computer"
+      value="Teensy 4.1"
+      description="600 MHz Cortex-M7 controller with enough headroom for sensing, estimation, control, and logging."
+    />
+    <StatCard
+      label="Control Strategy"
+      value="PID"
+      description="Initial cascaded PID architecture with a path toward more advanced control methods later."
+    />
+    <StatCard
+      label="Primary Target"
+      value="Stable hover"
+      description="Hold position within +/-0.3 m for 30 seconds while tracking stable attitude."
+    />
+    <StatCard
+      label="Future Direction"
+      value="LQR / MPC"
+      description="Use the validated platform as a flexible research base for control methods beyond PID."
+    />
+  </div>
+</div>
+
+## Vision
+
+Develop a fully functional, custom-built flight control system from the ground up while building hands-on experience in embedded systems, control theory, sensor integration, and real prototype validation.
+
+## Primary objectives
+
+- Design and fabricate a quadcopter airframe optimized as an FCS test platform
+- Develop a real-time PID flight controller running on a Teensy 4.1
+- Integrate IMU, barometer, and RC receiver for state estimation
+- Achieve stable autonomous hover and basic manual flight
+- Document hardware, software, and procedures for reproducibility
+- Establish a foundation for future work in LQR, MPC, or adaptive control
+
+## Secondary objectives
+
+- Build team expertise in controls, firmware, and mechanical design
+- Create simulation models for pre-flight validation
+- Develop systematic test and validation procedures
+- Publish findings and code as open references for future teams
+
+## Success metrics
+
+| Objective | Success criterion |
+| --- | --- |
+| Stable hover | Hold position within +/-0.3 m for 30 seconds |
+| PID tuning | Settling time under 1 s and overshoot under 15 percent |
+| Attitude control | Roll and pitch error under +/-2 deg during hover |
+| Documentation | Core project pages populated and maintained |
+| Safety | Zero uncontrolled crashes during indoor testing |
+
+## Section map
+
+<div className="mt-6 grid gap-4 md:grid-cols-2">
+  <DocsLinkCard
+    title="Technical Approach"
+    description="System architecture, interfaces, control loops, and implementation assumptions."
+    href="/documentation/projects/fcs/technical-approach"
+  />
+  <DocsLinkCard
+    title="Theory and Background"
+    description="Dynamics, coordinate frames, complementary filtering, and PID context."
+    href="/documentation/projects/fcs/theory"
+  />
+  <DocsLinkCard
+    title="Timeline and Validation"
+    description="Phases, functional requirements, and tracked validation status."
+    href="/documentation/projects/fcs/timeline-validation"
+  />
+  <DocsLinkCard
+    title="Logs and Results"
+    description="Bench results, assembly history, and logging expectations."
+    href="/documentation/projects/fcs/logs"
+  />
+  <DocsLinkCard
+    title="Committees"
+    description="Committee responsibilities, scopes, and expected deliverables."
+    href="/documentation/projects/fcs/committees"
+  />
+  <DocsLinkCard
+    title="Resources"
+    description="Papers, repositories, and public technical writeups tied to the broader lab."
+    href="/documentation/resources"
+  />
+</div>

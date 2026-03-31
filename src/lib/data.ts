@@ -511,7 +511,7 @@ export const featuredProjects: Project[] = [
     description: "Taking a quadcopter from bare frame through procurement, power integration, wiring, calibration, and first hover. Every decision is documented so the next team can understand why, not just what.",
     image: "/placeholder.svg?height=400&width=600",
     tags: ["Hardware", "Electronics", "Testing"],
-    link: "/roadmap",
+    link: "/documentation/projects/fcs",
     status: "Active",
   },
   {
@@ -520,7 +520,7 @@ export const featuredProjects: Project[] = [
     description: "A Python-based 6-DOF rigid body simulation for modeling quadcopter flight dynamics and testing feedback controllers in software before they touch hardware.",
     image: "/placeholder.svg?height=400&width=600",
     tags: ["Python", "Controls", "Dynamics"],
-    link: "/roadmap",
+    link: "/documentation/projects/fcs/theory",
     status: "Active",
   },
   {
@@ -529,7 +529,7 @@ export const featuredProjects: Project[] = [
     description: "Longer-term direction — if Cycle 1 produces clean enough simulation and hardware foundations, we want to move toward a custom flight control system rather than off-the-shelf firmware. Not this cycle, but what we're building toward.",
     image: "/placeholder.svg?height=400&width=600",
     tags: ["Embedded", "C++", "Future"],
-    link: "/projects",
+    link: "/documentation/projects/fcs",
     status: "Future Direction",
   },
 ];

@@ -1,0 +1,47 @@
+import { DocsLinkCard } from "@/components/docs/DocsLinkCard"
+
+# Projects
+
+The documentation tree is organized around project hubs rather than loose files. Each hub should expose the same essentials: scope, architecture, theory, validation plan, logs, and ownership.
+
+## Current technical hubs
+
+<div className="mt-6 grid gap-4 lg:grid-cols-2">
+  <DocsLinkCard
+    eyebrow="Current Flagship"
+    title="Flight Control System"
+    description="Top-level project hub for the custom quadcopter flight control system, including architecture, validation, theory, and logs."
+    href="/documentation/projects/fcs"
+  />
+  <DocsLinkCard
+    eyebrow="Public-facing context"
+    title="Projects landing page"
+    description="Return to the public projects page for the high-level view, then come back here for the deep technical material."
+    href="/projects"
+  />
+</div>
+
+## FCS navigation
+
+<div className="mt-6 grid gap-4 md:grid-cols-2">
+  <DocsLinkCard
+    title="Technical Approach"
+    description="Control hierarchy, interfaces, sensors, and development tooling."
+    href="/documentation/projects/fcs/technical-approach"
+  />
+  <DocsLinkCard
+    title="Theory and Background"
+    description="Dynamics, coordinate frames, estimation, and PID foundations."
+    href="/documentation/projects/fcs/theory"
+  />
+  <DocsLinkCard
+    title="Timeline and Validation"
+    description="Phase plan, success metrics, and validation status."
+    href="/documentation/projects/fcs/timeline-validation"
+  />
+  <DocsLinkCard
+    title="Logs and Results"
+    description="Assembly history, test results, and follow-up actions."
+    href="/documentation/projects/fcs/logs"
+  />
+</div>

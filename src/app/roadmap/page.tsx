@@ -9,7 +9,6 @@ import {
   ChevronDown,
   ChevronRight,
   Target,
-  ArrowRight,
   Cpu,
   Wrench,
   AlertTriangle,
@@ -18,7 +17,6 @@ import {
   FlaskConical,
   BookOpen,
   Flag,
-  Package,
   Filter,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"

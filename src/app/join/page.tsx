@@ -3,31 +3,33 @@ import { SectionWrapper } from "@/components/layout/SectionWrapper"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { collaboratorAreas, joinPrompts, sponsorAreas } from "@/lib/site-content"
+import { siteConfig } from "@/config/site"
 
 const contributionAreas = [
   {
     id: "controls",
     label: "Controls & Dynamics",
     description:
-      "You like math and want to understand flight control at the equation level — PID, LQR, rigid body dynamics, state-space.",
+      "You like math and want to understand dynamic systems at the equation level — PID, LQR, rigid body dynamics, and state-space models.",
   },
   {
     id: "simulation",
     label: "Simulation & Software",
     description:
-      "You write Python and want to build something that models physical systems — numerical integration, motor modeling, dynamics validation.",
+      "You write Python and want to model physical systems before hardware exists — numerical integration, system behavior, and validation.",
   },
   {
     id: "electronics",
     label: "Electronics & Power",
     description:
-      "Wiring a drone correctly is precise, methodical work. You read datasheets. You care about getting it right the first time.",
+      "You care about power paths, signal integrity, connectors, regulators, and reading datasheets until the system behaves the way it should.",
   },
   {
     id: "hardware",
     label: "Hardware & Fabrication",
     description:
-      "You like building physical things — frame assembly, component mounting, vibration isolation, mechanical integration.",
+      "You like building physical prototypes — mechanical integration, mounts, tolerances, packaging, and making the real system match the model.",
   },
   {
     id: "documentation",
@@ -48,24 +50,35 @@ export default function JoinPage() {
     <>
       <SectionWrapper className="pb-8">
         <PageHeader
-          title="Join AERL"
-          description="We're looking for students who want to do real engineering work — not watch it happen. Beginners welcome, if you're serious."
+          title="Join / Contact"
+          description="Recruitment, sponsor conversations, and collaborator outreach live in one place. If you want to understand why machines work, not just assemble them, start here."
         />
       </SectionWrapper>
 
       <SectionWrapper className="pt-0">
         <div className="grid gap-14 md:grid-cols-2">
-          {/* Left: Copy */}
           <div className="space-y-10">
-
             <div className="space-y-3">
               <h3 className="text-2xl font-bold tracking-tight">Who We&apos;re Looking For</h3>
               <p className="text-muted-foreground leading-relaxed">
                 You don&apos;t need to have done this before. You need to be serious about learning it.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                AERL is early — we&apos;re building the lab&apos;s culture and systems at the same time. There&apos;s room for people at different knowledge levels, as long as they show up and do the work.
+                AERL is where we derive models, simulate systems, build prototypes, and explain the results clearly.
+                There&apos;s room for people at different knowledge levels, as long as they show up and do the work.
               </p>
+            </div>
+
+            <div className="aerl-panel p-5">
+              <h3 className="text-xl font-bold tracking-tight text-foreground">What to include when you reach out</h3>
+              <ul className="mt-4 space-y-3 text-sm leading-6 text-muted-foreground">
+                {joinPrompts.map((prompt) => (
+                  <li key={prompt} className="flex gap-3">
+                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                    <span>{prompt}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <div className="space-y-3">
@@ -80,30 +93,44 @@ export default function JoinPage() {
               </div>
             </div>
 
-            <div className="space-y-3">
-              <h3 className="text-xl font-bold tracking-tight">What to Expect</h3>
-              <ul className="space-y-2.5 text-muted-foreground text-sm">
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold shrink-0">—</span>
-                  <span>We work in a structured quarterly cycle. Right now it&apos;s Cycle 1: two parallel tracks, 12 weeks of scoped work, ending in a tagged release and handoff documentation.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold shrink-0">—</span>
-                  <span>Meetings run on a regular cadence — track syncs, cross-track check-ins, and a final release session.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold shrink-0">—</span>
-                  <span>Showing up matters. Finishing your piece matters. Writing it down matters. If you join, you&apos;re committing to your track for the cycle, not just attending sometimes.</span>
-                </li>
-                <li className="flex gap-2">
-                  <span className="text-primary font-bold shrink-0">—</span>
-                  <span>Beginners welcome. We&apos;d rather have a beginner who asks good questions and documents carefully than an expert who goes quiet and disappears.</span>
-                </li>
-              </ul>
+            <div className="grid gap-4 lg:grid-cols-2">
+              <div className="aerl-panel p-5">
+                <h3 className="text-xl font-bold tracking-tight text-foreground">Sponsors</h3>
+                <ul className="mt-4 space-y-2.5 text-sm leading-6 text-muted-foreground">
+                  {sponsorAreas.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="aerl-panel p-5">
+                <h3 className="text-xl font-bold tracking-tight text-foreground">Collaborators</h3>
+                <ul className="mt-4 space-y-2.5 text-sm leading-6 text-muted-foreground">
+                  {collaboratorAreas.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="aerl-panel p-5">
+              <h3 className="text-xl font-bold tracking-tight text-foreground">Official contact channels</h3>
+              <div className="mt-4 space-y-2 text-sm text-muted-foreground">
+                <p>
+                  Email: <a className="text-primary hover:underline" href={siteConfig.links.email}>aerl@deanza.edu</a>
+                </p>
+                <p>
+                  GitHub: <a className="text-primary hover:underline" href={siteConfig.links.github} target="_blank" rel="noreferrer">github.com/aerl-deanza</a>
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Right: Application Form */}
           <div className="rounded-xl border bg-card text-card-foreground p-6 shadow-sm flex flex-col">
             <h3 className="font-semibold text-xl mb-6">Application</h3>
             <form className="space-y-5 flex-1 flex flex-col">
@@ -153,7 +180,7 @@ export default function JoinPage() {
               </div>
 
               <div className="mt-auto pt-6">
-                <Button type="button" className="w-full h-11 text-base font-semibold">Submit Application</Button>
+                <Button type="button" className="w-full h-11 text-base font-semibold">Submit Inquiry</Button>
               </div>
             </form>
           </div>

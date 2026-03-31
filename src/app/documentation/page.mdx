@@ -1,0 +1,102 @@
+import Link from "next/link"
+
+import { DocsLinkCard } from "@/components/docs/DocsLinkCard"
+import { StatCard } from "@/components/docs/StatCard"
+
+<div className="grid gap-8 xl:grid-cols-[1.08fr_0.92fr] xl:items-center">
+  <div>
+    <div className="aerl-kicker">Documentation</div>
+    <h1>Build ambitious systems. Document them rigorously.</h1>
+    <div className="text-[1.02rem] leading-8 text-muted-foreground">
+      This section is the technical backbone of the AERL site. The landing pages handle public-facing
+      orientation. These docs hold the real engineering material: derivations, simulations, implementation
+      details, validation targets, theory, logs, and resource collections.
+    </div>
+    <div className="mt-6 grid max-w-[31rem] gap-3 sm:grid-cols-2">
+      <Link href="/documentation/projects/fcs" className="aerl-action-link min-h-16 justify-center px-5 text-center">
+        <p className="m-0 leading-snug">Explore the FCS project</p>
+      </Link>
+      <Link href="/documentation/resources" className="aerl-action-link min-h-16 justify-center px-5 text-center">
+        <p className="m-0 leading-snug">Browse resources</p>
+      </Link>
+      <Link
+        href="/join"
+        className="aerl-action-link min-h-16 justify-center px-5 text-center sm:col-span-2 sm:justify-self-center"
+      >
+        <p className="m-0 leading-snug">Join or partner</p>
+      </Link>
+    </div>
+  </div>
+
+  <div className="rounded-[1.8rem] border border-border/70 bg-background/25 p-3 shadow-lg">
+    <img
+      src="/fcs/fcs-theory-board.png"
+      alt="AERL flight-control electronics stack with sensor modules, control loops, and instrumentation overlays"
+      className="w-full rounded-[1.4rem] object-cover"
+    />
+  </div>
+</div>
+
+## What lives here
+
+These pages are organized to support actual engineering work:
+
+- project hubs for current technical efforts
+- implementation context and systems architecture
+- theory and background for members learning the stack
+- validation criteria, test logs, and follow-up actions
+- public resources, repositories, and technical writeups
+
+## Snapshot
+
+<div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+  <StatCard
+    label="Flagship Program"
+    value="FCS"
+    description="A current systems program combining embedded control, simulation, and physical validation on a real test platform."
+  />
+  <StatCard
+    label="Core Committees"
+    value="4"
+    description="Controls, hardware, electronics, and simulation teams with clear engineering ownership."
+  />
+  <StatCard
+    label="Primary Outcome"
+    value="Handoff"
+    description="Every cycle should end with reusable documentation, code, and tested engineering knowledge."
+  />
+  <StatCard
+    label="Documentation Scope"
+    value="End-to-end"
+    description="Overview, theory, architecture, timeline, logs, and resources all live in one route tree."
+  />
+</div>
+
+## Start here
+
+<div className="mt-6 grid gap-4 md:grid-cols-2">
+  <DocsLinkCard
+    eyebrow="Project Hub"
+    title="Flight Control System"
+    description="Overview, objectives, section map, and the links you need to navigate the full FCS documentation."
+    href="/documentation/projects/fcs"
+  />
+  <DocsLinkCard
+    eyebrow="Reference"
+    title="Resources"
+    description="Papers, repositories, and technical writeups that support the current build and future handoff."
+    href="/documentation/resources"
+  />
+  <DocsLinkCard
+    eyebrow="Planning"
+    title="Roadmap"
+    description="Cycle-level execution plan for the current quarter, paired with the technical documentation here."
+    href="/roadmap"
+  />
+  <DocsLinkCard
+    eyebrow="Public Site"
+    title="Projects"
+    description="High-level project summaries and the public-facing explanation of what the lab is building."
+    href="/projects"
+  />
+</div>

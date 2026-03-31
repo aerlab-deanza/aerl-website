@@ -1,14 +1,24 @@
+import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, CheckCircle2, Clock, Circle } from "lucide-react"
+import { ArrowRight, CheckCircle2, ChevronRight, Circle, Clock } from "lucide-react"
 import * as Icons from "lucide-react"
 import { LucideIcon } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { SectionWrapper } from "@/components/layout/SectionWrapper"
 import { ProjectCard } from "@/components/cards/ProjectCard"
 import { CTA } from "@/components/blocks/CTA"
 
 import { featuredProjects, committees, tracks } from "@/lib/data"
+import { coreValues, labStats, missionPillars, visionStatements } from "@/lib/site-content"
+import { cn } from "@/lib/utils"
+
+const linkButtonBase =
+  "inline-flex items-center justify-center rounded-lg border border-transparent text-sm font-medium transition-all"
+const linkButtonLg = `${linkButtonBase} h-12 px-8`
+const linkButtonDefault = "bg-primary text-primary-foreground hover:bg-primary/85"
+const linkButtonOutline = "border-border bg-background hover:bg-muted hover:text-foreground"
+const linkButtonGhost = "hover:bg-muted hover:text-foreground"
+const linkButtonSm = `${linkButtonBase} h-8 rounded-md px-3 text-[0.8rem]`
 
 // ─── Build Status Snapshot ────────────────────────────────────────────────────
 
@@ -62,7 +72,8 @@ function BuildStatusCard({ track }: { track: (typeof tracks)[0] }) {
 // ─── Contribution Area Card ────────────────────────────────────────────────────
 
 function ContributionCard({ name, description, icon }: { name: string; description: string; icon: string }) {
-  const IconComponent = (Icons as any)[icon] as LucideIcon || Icons.Users
+  const iconMap = Icons as unknown as Record<string, LucideIcon>
+  const IconComponent = iconMap[icon] ?? Icons.Users
   return (
     <div className="flex gap-4 p-5 rounded-xl border border-border/40 bg-card hover:border-border hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 group">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
@@ -76,69 +87,169 @@ function ContributionCard({ name, description, icon }: { name: string; descripti
   )
 }
 
+function QuickStatCard({
+  label,
+  value,
+  description,
+}: {
+  label: string
+  value: string
+  description: string
+}) {
+  return (
+    <div className="aerl-panel p-5">
+      <p className="aerl-kicker">{label}</p>
+      <p className="mt-3 font-heading text-4xl font-bold text-foreground">{value}</p>
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">{description}</p>
+    </div>
+  )
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <SectionWrapper className="flex flex-col items-center justify-center space-y-10 text-center pt-24 pb-16 md:pt-32 md:pb-24">
-        <div className="space-y-5 max-w-3xl">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-8xl lg:leading-[1.1] text-foreground">
-            We build real systems.
-          </h1>
-          <p className="mx-auto max-w-[680px] text-lg text-muted-foreground sm:text-xl leading-relaxed">
-            AERL is a student engineering lab at De Anza College. Our current focus is a physical quadcopter build and a parallel simulation & controls track — both designed from first principles, documented so the next team can pick up where we leave off.
-          </p>
-          <p className="mx-auto max-w-[600px] text-sm text-muted-foreground/70 leading-relaxed">
-            We scope real problems, divide the work seriously, and write everything down. If that sounds like what you&apos;re looking for, come build with us.
-          </p>
-        </div>
-        <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-          <Button render={<Link href="/roadmap" />} size="lg" className="h-12 px-8">
-            See the Build Plan
-          </Button>
-          <Button render={<Link href="/join" />} variant="outline" size="lg" className="h-12 px-8">
-            Join the Lab
-          </Button>
-          <Button render={<Link href="/about" />} variant="ghost" size="lg" className="h-12 px-8 hidden sm:inline-flex">
-            About AERL
-          </Button>
+      <SectionWrapper className="pb-12 pt-10 md:pt-16">
+        <div className="grid gap-10 xl:grid-cols-[1.05fr_minmax(0,0.95fr)] xl:items-center">
+          <div className="space-y-6">
+            <p className="aerl-kicker">Applied Engineering Research Lab</p>
+            <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              Build full-stack engineering systems from first principles.
+            </h1>
+            <p className="max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
+              AERL is where you derive equations, simulate systems, build real prototypes, and document the work
+              well enough for the next team to continue instead of reverse engineering from scratch.
+            </p>
+            <p className="max-w-2xl text-sm leading-7 text-muted-foreground">
+              Our current flagship effort is the Flight Control System project, but the lab is broader than a single
+              platform. If you want to understand why machines work, not just assemble them, join AERL.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/projects" className={`${linkButtonLg} ${linkButtonDefault}`}>
+                Explore Projects
+              </Link>
+              <Link href="/documentation" className={`${linkButtonLg} ${linkButtonOutline}`}>
+                Open Documentation
+              </Link>
+              <Link href="/join" className={`${linkButtonLg} ${linkButtonGhost}`}>
+                Join or Partner
+              </Link>
+            </div>
+          </div>
+
+          <div className="aerl-grid-panel overflow-hidden p-3">
+            <div className="rounded-[1.6rem] border border-border/70 bg-background/25 p-2">
+              <Image
+                src="/fcs/fcs-technical-approach.png"
+                alt="AERL flagship prototype with axes, signal traces, and validation overlays"
+                width={1408}
+                height={768}
+                priority
+                className="h-auto w-full rounded-[1.3rem] object-cover"
+              />
+            </div>
+          </div>
         </div>
       </SectionWrapper>
 
-      {/* Current Build Status */}
-      <SectionWrapper className="bg-muted/20 py-14">
-        <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight">Current Build Cycle</h2>
-            <p className="text-muted-foreground mt-1.5 text-sm max-w-[520px]">
-              Two parallel tracks. One shared goal: leave behind systems that work and documentation a new team can actually use.
-            </p>
-          </div>
-          <Button render={<Link href="/roadmap" />} variant="ghost" size="sm" className="hidden md:inline-flex text-sm">
-            Full roadmap <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-          </Button>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {tracks.map((track) => (
-            <BuildStatusCard key={track.id} track={track} />
+      <SectionWrapper className="py-0">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {labStats.map((stat) => (
+            <QuickStatCard key={stat.label} {...stat} />
           ))}
         </div>
       </SectionWrapper>
 
-      {/* Active Projects */}
       <SectionWrapper>
-        <div className="mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight">What We&apos;re Working On</h2>
-            <p className="text-muted-foreground mt-2 max-w-[560px]">
-              Two active engineering efforts this cycle, and one longer-term direction they&apos;re building toward.
+        <div className="grid gap-6 xl:grid-cols-2">
+          <div className="aerl-panel p-6 md:p-8">
+            <p className="aerl-kicker">Mission</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Why the lab exists</h2>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
+              {missionPillars.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="aerl-panel p-6 md:p-8">
+            <p className="aerl-kicker">Vision</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">What we are trying to build</h2>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-muted-foreground">
+              {visionStatements.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      <SectionWrapper className="pt-0">
+        <div className="mb-8 max-w-2xl">
+          <p className="aerl-kicker">Values</p>
+          <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Engineering culture that survives handoff</h2>
+          <p className="mt-3 text-base leading-7 text-muted-foreground">
+            The lab is designed to feel closer to a serious engineering environment than a generic club page: scoped work, technical ownership, validation, and documentation that matters.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {coreValues.map((value) => (
+            <div key={value.title} className="aerl-panel p-6">
+              <h3 className="font-heading text-2xl font-semibold text-foreground">{value.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">{value.summary}</p>
+              <ul className="mt-4 space-y-2 text-sm leading-6 text-muted-foreground">
+                {value.bullets.map((bullet) => (
+                  <li key={bullet} className="flex gap-3">
+                    <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-primary" />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </SectionWrapper>
+
+      <SectionWrapper className="pt-0">
+        <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <p className="aerl-kicker">Flagship Project</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Current flagship projects</h2>
+            <p className="mt-3 text-base leading-7 text-muted-foreground">
+              The public site stays high-level. The deep technical details now live under the integrated documentation section.
             </p>
           </div>
-          <Button render={<Link href="/projects" />} variant="ghost" className="hidden md:inline-flex">
-            All projects <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
+          <Link href="/documentation/projects/fcs" className={cn(linkButtonBase, linkButtonOutline, "hidden md:inline-flex h-9 px-4")}>
+            FCS documentation <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </div>
+        <div className="aerl-grid-panel mb-6 p-6 md:p-8">
+          <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <div>
+              <p className="aerl-kicker">Flight Control System Project</p>
+              <h3 className="mt-3 font-heading text-3xl font-bold text-foreground">One project hub, from overview to validation logs</h3>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground">
+                The FCS hub covers objectives, architecture, committees, theory, validation targets, and logs for a Teensy-based custom flight control stack running on a quadcopter test platform.
+              </p>
+            </div>
+            <div className="grid gap-3 text-sm">
+              <Link href="/documentation/projects/fcs" className="aerl-action-link justify-between">
+                FCS overview <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/documentation/projects/fcs/technical-approach" className="aerl-action-link justify-between">
+                Technical approach <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/documentation/projects/fcs/logs" className="aerl-action-link justify-between">
+                Logs and results <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project) => (
@@ -147,11 +258,31 @@ export default function Home() {
         </div>
       </SectionWrapper>
 
-      {/* Contribution Areas */}
-      <SectionWrapper className="bg-muted/20">
+      <SectionWrapper className="bg-muted/20 py-14">
+        <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="aerl-kicker">Current Build Cycle</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground">Execution status across both tracks</h2>
+            <p className="mt-2 text-sm leading-7 text-muted-foreground max-w-[620px]">
+              Two parallel tracks. One shared goal: leave behind systems that work and documentation the next team can actually use.
+            </p>
+          </div>
+          <Link href="/roadmap" className={cn(linkButtonSm, linkButtonGhost, "hidden md:inline-flex")}>
+            Full roadmap <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {tracks.map((track) => (
+            <BuildStatusCard key={track.id} track={track} />
+          ))}
+        </div>
+      </SectionWrapper>
+
+      <SectionWrapper className="pt-0">
         <div className="mb-10 text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold tracking-tight">Ways to Contribute</h2>
-          <p className="text-muted-foreground mt-3 leading-relaxed">
+          <p className="aerl-kicker">Committees</p>
+          <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight text-foreground">Ways to contribute</h2>
+          <p className="mt-3 leading-relaxed text-muted-foreground">
             You don&apos;t need to know everything to join. You need to show up, ask good questions, and do the work.
           </p>
         </div>
@@ -164,7 +295,7 @@ export default function Home() {
 
       <CTA
         title="Ready to build something real?"
-        description="AERL is open to De Anza students who want deep technical experience and are willing to do the work. Beginners welcome — if you're serious about learning."
+        description="AERL is open to De Anza students, sponsors, and collaborators who want serious engineering work, clear ownership, and documentation that leaves the next team stronger."
         buttonText="Apply to Join"
         buttonLink="/join"
       />

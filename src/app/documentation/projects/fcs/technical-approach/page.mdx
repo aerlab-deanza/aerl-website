@@ -1,0 +1,75 @@
+# Technical Approach
+
+<figure>
+  <img
+    src="/fcs/fcs-technical-approach.png"
+    alt="Bench-top FCS quadcopter setup with labeled body axes, PID plot overlay, and architecture block diagram"
+  />
+  <figcaption>
+    Bench-level system view showing body-axis orientation, PID response context, and the modular flight stack architecture.
+  </figcaption>
+</figure>
+
+## System architecture
+
+The FCS uses a hierarchical control structure:
+
+- outer loop handles position and altitude targets
+- middle loop manages roll, pitch, and yaw attitude
+- inner loop performs motor mixing and PWM generation
+
+All loops run on the Teensy 4.1 at defined frequencies chosen to balance control responsiveness and implementation stability.
+
+## Flight computer
+
+The Teensy 4.1 was selected because it offers:
+
+- 600 MHz ARM Cortex-M7 performance
+- rich SPI, I2C, and UART peripheral support
+- a compact form factor suitable for flight hardware
+- enough compute headroom for sensing, estimation, control, and logging
+
+## Control strategy
+
+The initial controller is cascaded PID.
+
+| Loop | Input | Output | Target frequency |
+| --- | --- | --- | --- |
+| Roll PID | Roll angle error | Differential motor thrust | 500 Hz |
+| Pitch PID | Pitch angle error | Differential motor thrust | 500 Hz |
+| Yaw PID | Yaw rate error | Counter-torque adjustment | 500 Hz |
+| Altitude hold | Barometer altitude error | Collective thrust | 100 Hz |
+
+## Implementation notes
+
+- apply derivative to measurement instead of error to reduce derivative kick
+- clamp integral state to prevent windup
+- clamp final output to the valid motor command range
+- target a 500 Hz main control loop on the Teensy 4.1
+
+## Sensors and interfaces
+
+- IMU over I2C for angular rate and acceleration
+- barometer over I2C or SPI for altitude hold
+- RC receiver over SBUS or PPM
+- ESC outputs over PWM initially, with DSHOT as a future improvement if hardware compatibility is confirmed
+- SD logging for repeatable flight data analysis
+
+## Development stack
+
+| Layer | Tooling |
+| --- | --- |
+| Firmware | PlatformIO with Arduino framework |
+| Analysis | Python with matplotlib, pandas, and scipy |
+| Simulation | Python or MATLAB/Simulink |
+| Version control | Git and GitHub |
+
+## Theory background
+
+The platform is intentionally designed to teach and validate:
+
+- rigid-body quadcopter dynamics
+- coordinate frames and attitude representation
+- sensor fusion through a complementary filter
+- cascaded PID control and tuning
+- experimental validation from bench tests through flight tests
