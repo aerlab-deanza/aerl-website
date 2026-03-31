@@ -23,10 +23,10 @@ function SidebarNav() {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "block rounded-2xl border px-4 py-3 transition",
+                    "block rounded-2xl border px-4 py-3 transition-colors",
                     isActive
-                      ? "border-primary/30 bg-primary/10 text-foreground shadow-sm"
-                      : "border-border/60 bg-background/35 text-muted-foreground hover:border-border hover:bg-card/60 hover:text-foreground"
+                      ? "border-[var(--sidebar-active-border)] bg-[var(--sidebar-active)] text-foreground shadow-sm"
+                      : "border-border/70 bg-card/55 text-muted-foreground hover:border-[var(--sidebar-active-border)] hover:bg-[var(--nav-hover)] hover:text-foreground"
                   )}
                 >
                   <span className="block text-sm font-semibold">{item.title}</span>

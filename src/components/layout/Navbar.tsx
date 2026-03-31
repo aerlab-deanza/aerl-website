@@ -8,7 +8,6 @@ import { Menu } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -19,11 +18,11 @@ export function Navbar() {
     pathname === href || (href !== "/" && pathname.startsWith(`${href}/`))
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/85 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/95 shadow-[0_10px_30px_rgb(6_24_30_/_0.08)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/88">
       <div className="container mx-auto flex h-18 max-w-7xl items-center px-4 md:px-8">
         <div className="mr-4 hidden md:flex md:items-center">
           <Link href="/" className="mr-8 flex items-center gap-3">
-            <div className="rounded-full border border-border/70 bg-card/75 p-1.5 shadow-sm">
+            <div className="rounded-full border border-border/85 bg-card/95 p-1.5 shadow-sm">
               <Image
                 src="/brand/aerl-logo.png"
                 alt="AERL logo"
@@ -41,14 +40,16 @@ export function Navbar() {
               </span>
             </div>
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
+          <nav className="flex items-center space-x-2 text-sm font-medium">
             {siteConfig.mainNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "transition-colors hover:text-foreground/80",
-                  isActive(item.href) ? "text-foreground" : "text-foreground/60"
+                  "rounded-full px-3 py-2 transition-colors transition-shadow",
+                  isActive(item.href)
+                    ? "bg-[var(--nav-active)] text-[var(--nav-active-foreground)] shadow-sm"
+                    : "text-foreground/80 hover:bg-[var(--nav-hover)] hover:text-foreground"
                 )}
               >
                 {item.title}
@@ -57,14 +58,7 @@ export function Navbar() {
           </nav>
         </div>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetTrigger 
-            render={
-              <Button
-                variant="ghost"
-                className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
-              />
-            }
-          >
+          <SheetTrigger className="mr-2 inline-flex h-9 w-9 items-center justify-center rounded-lg text-base text-foreground transition-colors hover:bg-[var(--nav-hover)] focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none md:hidden">
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle Menu</span>
           </SheetTrigger>
@@ -88,14 +82,16 @@ export function Navbar() {
                 </span>
               </div>
             </Link>
-            <div className="my-4 flex flex-col space-y-3 pb-10 pl-6">
+            <div className="my-4 flex flex-col space-y-2 pb-10 pl-6">
               {siteConfig.mainNav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "font-medium",
-                    isActive(item.href) ? "text-foreground" : "text-muted-foreground"
+                    "rounded-full px-3 py-2 font-medium transition-colors",
+                    isActive(item.href)
+                      ? "bg-[var(--nav-active)] text-[var(--nav-active-foreground)]"
+                      : "text-foreground/80 hover:bg-[var(--nav-hover)] hover:text-foreground"
                   )}
                   onClick={() => setIsOpen(false)}
                 >
@@ -113,7 +109,7 @@ export function Navbar() {
                 alt="AERL logo"
                 width={32}
                 height={32}
-                className="rounded-full border border-border/70 bg-card/70 p-1"
+                className="rounded-full border border-border/85 bg-card/90 p-1"
               />
               <span className="font-heading text-base font-bold tracking-[0.2em] text-foreground">
                 {siteConfig.shortName}
