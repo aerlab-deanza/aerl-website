@@ -1,49 +1,85 @@
-# Starlight Starter Kit: Basics
+# Applied Engineering Research Lab Website
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Public website and documentation hub for the Applied Engineering Research Lab (AERL), built with Astro and Starlight.
 
+## Stack
+
+- Astro
+- Starlight
+- Markdown/MDX content
+- Custom CSS theme in `src/styles/aerl.css`
+
+## Local Development
+
+Run all commands from the project root:
+
+```bash
+npm install
+ASTRO_TELEMETRY_DISABLED=1 npm run dev
 ```
-npm create astro@latest -- --template starlight
+
+Astro will start a local server, usually at `http://localhost:4321`.
+
+## Production Build
+
+```bash
+ASTRO_TELEMETRY_DISABLED=1 npm run build
+ASTRO_TELEMETRY_DISABLED=1 npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The production output is generated in `dist/`.
 
-## 🚀 Project Structure
+## Project Structure
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
+```text
 .
 ├── public/
+│   └── fcs/                  # Public image assets used in docs pages
 ├── src/
-│   ├── assets/
+│   ├── assets/               # Imported Astro image assets
 │   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
+│   │   └── docs/             # Starlight content routes
+│   ├── pages/
+│   │   └── 404.astro         # Custom branded 404 page
+│   └── styles/
+│       └── aerl.css          # Site-wide branding and theme overrides
 ├── astro.config.mjs
 ├── package.json
-└── tsconfig.json
+└── README.md
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+## Main Content Areas
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+- `src/content/docs/index.mdx`:
+  Homepage
+- `src/content/docs/about/`:
+  About pages
+- `src/content/docs/projects/`:
+  Project index and FCS hub
+- `src/content/docs/resources.mdx`:
+  Papers, repos, and writeups
+- `src/content/docs/updates.mdx`:
+  Recruitment, sponsor, and collaboration updates
+- `src/content/docs/join.mdx`:
+  Join and contact page
 
-Static assets, like favicons, can be placed in the `public/` directory.
+## Editing Content
 
-## 🧞 Commands
+- Use `.md` or `.mdx` files under `src/content/docs/` to add or edit pages.
+- Use `src/assets/` for Astro-managed images you want optimized at build time.
+- Use `public/` for static files you want to reference directly by URL.
 
-All commands are run from the root of the project, from a terminal:
+## Current Gaps
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+The site structure and branding are in place, but several content areas still need real data:
 
-## 👀 Want to learn more?
+- committee lead names
+- contact links and official lab email
+- sponsor details
+- resource links and repositories
+- real test logs and project updates
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+## Notes
+
+- The site uses a custom Astro 404 page instead of the Starlight default.
+- If you later choose a production domain, add it to `astro.config.mjs` as the `site` value.

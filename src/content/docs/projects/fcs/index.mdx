@@ -1,0 +1,50 @@
+---
+title: FCS Overview
+description: Top-level overview of the Flight Control System project.
+---
+
+## Project Summary
+
+The Flight Control System Project is a student engineering initiative to design, build, and validate a custom flight control system for a quadcopter team.
+
+The Teensy 4.1 microcontroller serves as the primary flight controller, running a PID-based control architecture. The quadcopter itself is a purpose-built test platform used to validate algorithms, hardware, and software in real flight conditions.
+
+## Vision
+
+Develop a fully functional, custom-built flight control system from the ground up while building hands-on experience in embedded systems, control theory, sensor integration, and real prototype validation.
+
+The FCS is intended to become a flexible research platform that can support more advanced control algorithms after the initial PID implementation is stable.
+
+## Primary Objectives
+
+- Design and fabricate a quadcopter airframe optimized as an FCS test platform
+- Develop a real-time PID flight controller running on a Teensy 4.1
+- Integrate IMU, barometer, and RC receiver for state estimation
+- Achieve stable autonomous hover and basic manual flight
+- Document hardware, software, and procedures for reproducibility
+- Establish a foundation for future work in LQR, MPC, or adaptive control
+
+## Secondary Objectives
+
+- Build team expertise in controls, firmware, and mechanical design
+- Create simulation models for pre-flight validation
+- Develop systematic test and validation procedures
+- Publish findings and code as open references for future teams
+
+## Success Metrics
+
+| Objective | Success criterion |
+| --- | --- |
+| Stable hover | Hold position within +/-0.3 m for 30 seconds |
+| PID tuning | Settling time under 1 s and overshoot under 15 percent |
+| Attitude control | Roll and pitch error under +/-2 deg during hover |
+| Documentation | Core project pages populated and maintained |
+| Safety | Zero uncontrolled crashes during indoor testing |
+
+## Project Sections
+
+- [Technical Approach](/projects/fcs/technical-approach/)
+- [Theory and Background](/projects/fcs/theory/)
+- [Timeline and Validation](/projects/fcs/timeline-validation/)
+- [Logs and Results](/projects/fcs/logs/)
+- [Committees](/projects/fcs/committees/)

@@ -1,40 +1,101 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: Applied Engineering Research Lab
+description: Engineering research, technical documentation, and project portfolios from AERL.
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  title: '<span class="aerl-kicker">Applied Engineering Research Lab</span><span class="aerl-hero-line">Build ambitious systems.</span><span class="aerl-hero-line">Document them rigorously.</span>'
+  tagline: Student-led work in controls, embedded systems, simulation, and physical prototyping, structured like a real engineering lab instead of a classroom club page.
   image:
-    file: ../../assets/houston.webp
+    html: |
+      <div class="aerl-hero-art">
+        <img src="/fcs/fcs-technical-approach.png" alt="AERL flagship prototype with axes, signal traces, and validation overlays" />
+      </div>
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Explore the FCS Project
+      link: /projects/fcs/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: Browse Resources
+      link: /resources/
+      icon: right-arrow
+    - text: Join or Partner
+      link: /join/
+      icon: right-arrow
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Mission
+
+The Applied Engineering Research Lab exists to:
+
+- Execute ambitious engineering projects
+- Develop engineering talent
+- Foster interdisciplinary collaboration
+- Contribute to open knowledge through publications and open-source work
+- Bridge academia and industry
+
+## Vision
+
+We envision a lab where theory from class is applied directly to ambitious projects, failures become structured learning, and students leave with stronger technical judgment than they arrived with.
+
+AERL is where you build full-stack engineering systems. We derive equations, simulate systems, and build real prototypes.
+
+## Values
+
+- Rigor in testing, validation, and documentation
+- Collaboration across disciplines and committees
+- Ambition in project scope and technical depth
+- Openness through publications, repositories, and public writeups
+
+## Quick stats
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="Founded">
+		2026
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="Current Members">
+		30
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Committees">
+		4 functional engineering groups
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Flagship Project">
+		Full-stack control and prototyping program
 	</Card>
 </CardGrid>
+
+## Current flagship projects
+
+### Flight Control System Project
+
+The FCS project is a full project hub covering objectives, architecture, committee ownership, validation targets, theory, and test logs for a custom quadcopter flight controller built on the Teensy 4.1.
+
+- [Open the FCS overview](/projects/fcs/)
+- [Read the technical approach](/projects/fcs/technical-approach/)
+- [Review theory and background](/projects/fcs/theory/)
+- [Check logs and results](/projects/fcs/logs/)
+
+## Call to action
+
+Use this site to understand the lab, explore the project work, and find a path to participate.
+
+- [Learn about the lab](/about/)
+- [Browse resources](/resources/)
+- [See current updates](/updates/)
+- [Join or contact the lab](/join/)
+
+<div class="aerl-home-cta">
+  <div>
+    <p class="aerl-section-label">Work With AERL</p>
+    <h2>Join the lab, support the build, or collaborate on the research.</h2>
+    <p>
+      We derive equations, simulate systems, and build real prototypes. If you want to understand why
+      machines work, not just assemble them, start from the active project work.
+    </p>
+  </div>
+  <div class="aerl-home-cta-links">
+    <a href="/join/">Join or Contact</a>
+    <a href="/projects/fcs/">See the Flagship Project</a>
+  </div>
+</div>
