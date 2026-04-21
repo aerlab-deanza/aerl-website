@@ -180,7 +180,7 @@ export default function JoinPage() {
               </div>
 
               <div className="mt-auto pt-6">
-                <Button type="button" className="w-full h-11 text-base font-semibold">Submit Inquiry</Button>
+                <Button type="submit" className="w-full h-11 text-base font-semibold">Submit Inquiry</Button>
               </div>
             </form>
           </div>

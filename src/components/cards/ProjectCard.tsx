@@ -47,7 +47,7 @@ export function ProjectCard({ title, description, tags, link, status }: ProjectC
 
   return (
     <Card className={cn(
-      "flex flex-col h-full bg-card border-border/40 hover:border-border hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group relative",
+      "flex flex-col h-full bg-card border-border/40 hover:border-border hover:-translate-y-2 transition-all duration-200 ease-out group relative shadow-sm",
       isFuture && "opacity-70 hover:opacity-90"
     )}>
       <CardHeader>

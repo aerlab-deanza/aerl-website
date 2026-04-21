@@ -165,11 +165,17 @@
 
 @layer components {
   .aerl-panel {
-    @apply rounded-[1.75rem] border border-border/85 bg-card/88 shadow-[0_18px_55px_rgb(1_14_18_/_0.18)] backdrop-blur;
+    @apply rounded-[1.75rem] border border-border/85 bg-card/88 shadow-[0_18px_55px_rgb(1_14_18_/_0.18)] backdrop-blur transition-all duration-200 ease-out;
+  }
+  .aerl-panel:hover {
+    @apply -translate-y-2 shadow-[0_18px_55px_rgb(1_14_18_/_0.18)];
   }
 
   .aerl-grid-panel {
-    @apply relative overflow-hidden rounded-[1.75rem] border border-border/85 bg-card/88 shadow-[0_18px_55px_rgb(1_14_18_/_0.18)] backdrop-blur;
+    @apply relative overflow-hidden rounded-[1.75rem] border border-border/85 bg-card/88 shadow-[0_18px_55px_rgb(1_14_18_/_0.18)] backdrop-blur transition-all duration-200 ease-out;
+  }
+  .aerl-grid-panel:hover {
+    @apply -translate-y-2 shadow-[0_18px_55px_rgb(1_14_18_/_0.18)];
   }
 
   .aerl-grid-panel::before {

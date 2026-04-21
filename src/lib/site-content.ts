@@ -67,7 +67,7 @@ export const leadershipTeam = [
   { role: "Technical Strategist", name: "Zhen Huey Lee" },
   { role: "Public Relationship Officer", name: "Myat Thu Htet" },
   { role: "Treasurer", name: "Thu Thu Win Tun" },
-  { role: "ICC Representative", name: "Thomas Nguyen" },
+  { role: "ICC Representative", name: "Minh Le" },
 ];
 
 export const technicalLeadOpenings = [

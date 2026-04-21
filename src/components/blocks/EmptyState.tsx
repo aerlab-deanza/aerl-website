@@ -7,7 +7,7 @@ interface EmptyStateProps {
 
 export function EmptyState({ title, description }: EmptyStateProps) {
   return (
-    <div className="flex min-h-[400px] flex-col items-center justify-center space-y-4 rounded-lg border border-dashed p-8 text-center animate-in fade-in-50">
+    <div className="flex min-h-[400px] flex-col items-center justify-center space-y-4 rounded-lg border border-dashed p-8 text-center animate-in fade-in-50 hover:-translate-y-2 transition-transform duration-200 ease-out">
       <div className="flex h-16 w-16 items-center justify-center rounded-full bg-muted">
         <FileX2 className="h-8 w-8 text-muted-foreground" />
       </div>

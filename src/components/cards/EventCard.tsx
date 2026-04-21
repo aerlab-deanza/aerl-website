@@ -10,7 +10,7 @@ interface EventCardProps {
 
 export function EventCard({ title, date, location, type }: EventCardProps) {
   return (
-    <div className="group relative flex flex-col items-start gap-4 rounded-lg border border-border/40 bg-card p-6 hover:border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    <div className="group relative flex flex-col items-start gap-4 rounded-lg border border-border/40 bg-card p-6 hover:border-border hover:-translate-y-2 transition-all duration-200 ease-out shadow-sm">
       <div className="flex items-center gap-2">
         <Badge variant={type === "Workshop" ? "default" : "outline"}>{type}</Badge>
       </div>
