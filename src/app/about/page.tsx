@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { PageHeader } from "@/components/layout/PageHeader"
 import { SectionWrapper } from "@/components/layout/SectionWrapper"
 import { committeeModel, coreValues, labStats, leadershipTeam, missionPillars, technicalLeadOpenings, visionStatements } from "@/lib/site-content"
@@ -8,10 +9,27 @@ export default function AboutPage() {
   return (
     <>
       <SectionWrapper className="pb-8">
-        <PageHeader
-          title="About AERL"
-          description="A student engineering research lab at De Anza College. We derive models, simulate systems, build prototypes, and publish work the next cohort can continue."
-        />
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <PageHeader
+              title="About AERL"
+              description="A student engineering research lab at De Anza College. We derive models, simulate systems, build prototypes, and publish work the next cohort can continue."
+              className="md:pb-0 md:pt-4"
+            />
+          </div>
+          <div className="aerl-grid-panel overflow-hidden p-2">
+            <div className="rounded-[1.1rem] border border-border/50 bg-background/20 overflow-hidden">
+              <Image
+                src="/fcs/aerl-hero-composite.png"
+                alt="AERL Composite Hero"
+                width={800}
+                height={500}
+                priority
+                className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </div>
+          </div>
+        </div>
       </SectionWrapper>
 
       <SectionWrapper className="pt-0">

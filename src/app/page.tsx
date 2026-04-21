@@ -110,48 +110,41 @@ function QuickStatCard({
 export default function Home() {
   return (
     <>
-      <SectionWrapper className="pb-12 pt-10 md:pt-16">
-        <div className="grid gap-10 xl:grid-cols-[1.05fr_minmax(0,0.95fr)] xl:items-center">
-          <div className="space-y-6">
-            <p className="aerl-kicker">Applied Engineering Research Lab</p>
-            <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-              Build full-stack engineering systems from first principles.
-            </h1>
-            <p className="max-w-2xl text-lg leading-8 text-muted-foreground md:text-xl">
-              AERL is where you derive equations, simulate systems, build real prototypes, and document the work
-              well enough for the next team to continue instead of reverse engineering from scratch.
-            </p>
-            <p className="max-w-2xl text-sm leading-7 text-muted-foreground">
-              Our current flagship effort is the Flight Control System project, but the lab is broader than a single
-              platform. If you want to understand why machines work, not just assemble them, join AERL.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/projects" className={`${linkButtonLg} ${linkButtonDefault}`}>
-                Explore Projects
-              </Link>
-              <Link href="/documentation" className={`${linkButtonLg} ${linkButtonOutline}`}>
-                Open Documentation
-              </Link>
-              <Link href="/join" className={`${linkButtonLg} ${linkButtonGhost}`}>
-                Join or Partner
-              </Link>
-            </div>
-          </div>
+      <section className="relative flex min-h-[90vh] sm:min-h-screen w-full items-center justify-center overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
 
-          <div className="aerl-grid-panel overflow-hidden p-3">
-            <div className="rounded-[1.6rem] border border-border/70 bg-background/25 p-2">
-              <Image
-                src="/fcs/fcs-technical-approach.png"
-                alt="AERL flagship prototype with axes, signal traces, and validation overlays"
-                width={1408}
-                height={768}
-                priority
-                className="h-auto w-full rounded-[1.3rem] object-cover"
-              />
-            </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background backdrop-blur-[4px]"></div>
+
+        <div className="relative z-10 flex flex-col items-center justify-center px-4 text-center mx-auto max-w-4xl space-y-8 mt-16">
+          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-primary animate-in fade-in slide-in-from-bottom-4 duration-700">
+            Applied Engineering Research Lab
+          </p>
+          <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-7xl lg:text-[5.5rem] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150 fill-mode-both leading-[1.1]">
+            Build full-stack <br className="hidden sm:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-primary">engineering systems</span> from first principles.
+          </h1>
+          <p className="max-w-2xl text-lg leading-8 text-foreground/80 md:text-xl animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-both">
+            AERL is where you derive equations, simulate systems, build real prototypes, and document the work well enough for the next team to extend.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-500 fill-mode-both mt-4">
+            <Link href="/projects" className={`${linkButtonLg} ${linkButtonDefault} bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(11,78,87,0.4)] hover:shadow-[0_0_30px_rgba(11,78,87,0.6)] border-0`}>
+              Explore our projects <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+            <Link href="/documentation" className={`${linkButtonLg} ${linkButtonOutline} border-primary/20 bg-background/50 backdrop-blur-md hover:bg-primary/10 hover:border-primary/40 text-foreground`}>
+              Open Documentation
+            </Link>
           </div>
         </div>
-      </SectionWrapper>
+
+        <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+      </section>
 
       <SectionWrapper className="py-0">
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

@@ -1,4 +1,7 @@
+"use client"
+
 import { cn } from "@/lib/utils"
+import { motion } from "framer-motion"
 
 interface SectionWrapperProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode
@@ -10,7 +13,15 @@ export function SectionWrapper({ children, className, ...props }: SectionWrapper
       className={cn("mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8 py-16 md:py-24", className)}
       {...props}
     >
-      {children}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {children}
+      </motion.div>
     </section>
   )
 }
+
