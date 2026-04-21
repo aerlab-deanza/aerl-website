@@ -53,6 +53,30 @@ npm run dev
 
 Dev server runs on `localhost:3000` by default (Turbopack).
 
+## Google Sheets-backed inquiries
+
+The Join / Contact form can append submissions directly into a Google Sheet. This is the only write-path using Sheets; the rest of the site content remains code-managed.
+
+Create a Google Cloud service account with access to the target spreadsheet and set these environment variables locally and in Vercel:
+
+```bash
+GOOGLE_SHEETS_SPREADSHEET_ID=your-spreadsheet-id
+GOOGLE_SHEETS_SHEET_NAME=Join Inquiries
+GOOGLE_SHEETS_CLIENT_EMAIL=service-account@project.iam.gserviceaccount.com
+GOOGLE_SHEETS_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GOOGLE_SHEETS_PRIVATE_KEY_ID=optional-private-key-id
+```
+
+Expected columns in the sheet:
+
+1. submitted_at
+2. first_name
+3. last_name
+4. email
+5. major_background
+6. contribution_area
+7. inquiry
+
 ---
 
 ## Content Structure

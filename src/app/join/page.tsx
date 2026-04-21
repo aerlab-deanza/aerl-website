@@ -1,49 +1,9 @@
 import { PageHeader } from "@/components/layout/PageHeader"
 import { SectionWrapper } from "@/components/layout/SectionWrapper"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { JoinInquiryForm } from "@/components/forms/JoinInquiryForm"
 import { collaboratorAreas, joinPrompts, sponsorAreas } from "@/lib/site-content"
 import { siteConfig } from "@/config/site"
-
-const contributionAreas = [
-  {
-    id: "controls",
-    label: "Controls & Dynamics",
-    description:
-      "You like math and want to understand dynamic systems at the equation level — PID, LQR, rigid body dynamics, and state-space models.",
-  },
-  {
-    id: "simulation",
-    label: "Simulation & Software",
-    description:
-      "You write Python and want to model physical systems before hardware exists — numerical integration, system behavior, and validation.",
-  },
-  {
-    id: "electronics",
-    label: "Electronics & Power",
-    description:
-      "You care about power paths, signal integrity, connectors, regulators, and reading datasheets until the system behaves the way it should.",
-  },
-  {
-    id: "hardware",
-    label: "Hardware & Fabrication",
-    description:
-      "You like building physical prototypes — mechanical integration, mounts, tolerances, packaging, and making the real system match the model.",
-  },
-  {
-    id: "documentation",
-    label: "Documentation & Ops",
-    description:
-      "You think documentation is the difference between a real lab and a hobby project. You write clearly and care about handoff.",
-  },
-  {
-    id: "unsure",
-    label: "Not Sure Yet",
-    description:
-      "You don't know exactly where you fit. That's fine — tell us what you're trying to learn and we'll find where you're useful.",
-  },
-]
+import { contributionAreas } from "@/lib/join-form"
 
 export default function JoinPage() {
   return (
@@ -133,56 +93,7 @@ export default function JoinPage() {
 
           <div className="rounded-xl border bg-card text-card-foreground p-6 shadow-sm flex flex-col">
             <h3 className="font-semibold text-xl mb-6">Application</h3>
-            <form className="space-y-5 flex-1 flex flex-col">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input id="firstName" placeholder="Ada" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input id="lastName" placeholder="Lovelace" required />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="email">Student Email</Label>
-                <Input id="email" type="email" placeholder="ada@student.deanza.edu" required />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="major">Major / Background</Label>
-                <Input id="major" placeholder="e.g. Computer Science, Electrical Engineering" required />
-              </div>
-
-              <div className="space-y-2 pt-2">
-                <Label htmlFor="area">Where do you think you&apos;d contribute?</Label>
-                <select
-                  id="area"
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  required
-                >
-                  <option value="" disabled>Select an area</option>
-                  {contributionAreas.map((area) => (
-                    <option key={area.id} value={area.id}>{area.label}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="space-y-2 pt-2">
-                <Label htmlFor="why">What do you want to build or learn here?</Label>
-                <textarea
-                  id="why"
-                  className="flex min-h-[110px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                  placeholder="Be specific. What draws you to this kind of work and what do you hope to get out of it?"
-                  required
-                />
-              </div>
-
-              <div className="mt-auto pt-6">
-                <Button type="button" className="w-full h-11 text-base font-semibold">Submit Inquiry</Button>
-              </div>
-            </form>
+            <JoinInquiryForm />
           </div>
         </div>
       </SectionWrapper>
