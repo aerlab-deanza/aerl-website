@@ -7,7 +7,7 @@ import { featuredProjects } from "@/lib/data"
 
 export default function ProjectsPage() {
   const activeProjects = featuredProjects.filter((p) => p.status === "Active")
-  const futureProjects = featuredProjects.filter((p) => p.status === "Future Direction" || p.status === "Planning")
+  const futureProjects = featuredProjects.filter((p) => p.status === "Future Direction")
 
   return (
     <>

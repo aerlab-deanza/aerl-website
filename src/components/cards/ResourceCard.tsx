@@ -9,7 +9,7 @@ interface ResourceCardProps {
 
 export function ResourceCard({ title, description, category, link }: ResourceCardProps) {
   return (
-    <a href={link} className="flex p-5 gap-4 rounded-lg border bg-card text-card-foreground shadow-sm hover:bg-muted/50 transition-colors group">
+    <a href={link} className="flex p-5 gap-4 rounded-lg border border-border/40 bg-card text-card-foreground shadow-sm hover:border-border hover:bg-muted/50 hover:-translate-y-1 transition-all duration-200 ease-out group">
       <div className="text-muted-foreground group-hover:text-primary transition-colors mt-0.5">
         <FileText className="h-6 w-6" />
       </div>

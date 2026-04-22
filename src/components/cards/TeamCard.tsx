@@ -16,7 +16,7 @@ export function TeamCard({ name, description, icon, focusArea, roadmapSupport }:
   const IconComponent = iconMap[icon] ?? Icons.Users
 
   return (
-    <div className="flex flex-col gap-3 rounded-lg border border-border/40 bg-card p-6 shadow-sm hover:border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300 h-full group">
+    <div className="flex flex-col gap-3 rounded-lg border border-border/40 bg-card p-6 shadow-sm hover:border-border hover:-translate-y-2 transition-all duration-200 ease-out h-full group">
       <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
         <IconComponent className="h-6 w-6" />
       </div>
