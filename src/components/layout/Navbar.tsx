@@ -36,8 +36,8 @@ export function Navbar() {
             : "mt-4 h-14 w-full max-w-7xl px-4 md:px-8 bg-transparent text-foreground"
         )}
       >
-        <div className="flex items-center">
-          <Link href="/" className="mr-6 flex items-center gap-3 group">
+        <div className="flex flex-1 items-center justify-start">
+          <Link href="/" className="flex items-center gap-3 group">
             <div className={cn(
               "rounded-full p-1.5 transition-colors duration-700 ease-in-out",
               isScrolled ? "bg-white border-white border shadow-sm" : "border border-transparent bg-transparent"
@@ -65,29 +65,29 @@ export function Navbar() {
               </span>
             </div>
           </Link>
-
-          <nav className="hidden md:flex items-center space-x-1 font-medium">
-            {siteConfig.mainNav.map((item) => {
-              const active = isActive(item.href)
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "rounded-full px-3 py-1.5 text-sm transition-all duration-500 ease-in-out",
-                    isScrolled
-                      ? active ? "bg-[#0b4e57]/10 text-[#0b4e57] font-bold" : "text-[#0a2e15]/70 hover:bg-[#0b4e57]/5 hover:text-[#0b4e57]"
-                      : active ? "bg-[var(--nav-active)] text-[var(--nav-active-foreground)] shadow-sm" : "text-foreground/80 hover:bg-[var(--nav-hover)] hover:text-foreground"
-                  )}
-                >
-                  {item.title}
-                </Link>
-              )
-            })}
-          </nav>
         </div>
 
-        <div className="flex items-center space-x-4">
+        <nav className="hidden md:flex items-center justify-center space-x-1 font-medium">
+          {siteConfig.mainNav.map((item) => {
+            const active = isActive(item.href)
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-sm transition-all duration-500 ease-in-out",
+                  isScrolled
+                    ? active ? "bg-[#0b4e57]/10 text-[#0b4e57] font-bold" : "text-[#0a2e15]/70 hover:bg-[#0b4e57]/5 hover:text-[#0b4e57]"
+                    : active ? "bg-[var(--nav-active)] text-[var(--nav-active-foreground)] shadow-sm" : "text-foreground/80 hover:bg-[var(--nav-hover)] hover:text-foreground"
+                )}
+              >
+                {item.title}
+              </Link>
+            )
+          })}
+        </nav>
+
+        <div className="flex flex-1 items-center justify-end space-x-4">
           <Link
             href="/join"
             className={cn(

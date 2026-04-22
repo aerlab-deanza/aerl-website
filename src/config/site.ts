@@ -14,6 +14,5 @@ export const siteConfig = {
     { title: "Roadmap", href: "/roadmap" },
     { title: "Documentation", href: "/documentation" },
     { title: "Updates", href: "/updates" },
-    { title: "Join", href: "/join" },
   ],
 }
