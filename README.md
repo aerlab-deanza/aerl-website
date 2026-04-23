@@ -34,7 +34,7 @@ This is not a polished marketing site — it's a working artifact. It serves as:
 
 | Layer | Tool |
 |---|---|
-| Framework | Next.js 15 (App Router, Turbopack) |
+| Framework | Next.js 16 (App Router, Turbopack) |
 | Styling | Tailwind CSS v4 + `oklch` design tokens |
 | Components | Custom Shadcn UI derivatives |
 | Data | `src/lib/data.ts` — centralized, typed |

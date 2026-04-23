@@ -5,7 +5,7 @@ export const siteConfig = {
     "A student engineering research lab at De Anza College focused on ambitious builds, rigorous documentation, and interdisciplinary engineering work.",
   url: "https://aerl.deanza.edu",
   links: {
-    github: "https://github.com/aerl-deanza",
+    github: "https://github.com/aerlab-deanza",
     email: "mailto:aerl@deanza.edu",
   },
   mainNav: [

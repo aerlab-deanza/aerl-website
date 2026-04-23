@@ -1,4 +1,4 @@
-import { PageHeader } from "@/components/layout/PageHeader"
+import Image from "next/image"
 import { SectionWrapper } from "@/components/layout/SectionWrapper"
 import { ProjectCard } from "@/components/cards/ProjectCard"
 import Link from "next/link"
@@ -12,10 +12,30 @@ export default function ProjectsPage() {
   return (
     <>
       <SectionWrapper className="pb-8">
-        <PageHeader
-          title="Projects"
-          description="Public-facing project summaries live here. Deep technical material, validation details, theory, and logs now live in the integrated documentation section."
-        />
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+          {/* Image — right */}
+          <div className="aerl-grid-panel overflow-hidden p-2 order-2">
+            <div className="rounded-[1.1rem] border border-border/50 bg-background/20 overflow-hidden">
+              <Image
+                src="/fcs/fcs-technical-approach.png"
+                alt="FCS Technical Approach"
+                width={800}
+                height={500}
+                priority
+                className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </div>
+          </div>
+
+          {/* Header text — left */}
+          <div className="space-y-4 pb-8 pt-[104px] md:pt-[120px] md:pb-12 order-1">
+            <p className="aerl-kicker">Applied Engineering Research Lab</p>
+            <h1 className="font-heading text-4xl font-extrabold tracking-tight text-foreground md:text-6xl">Projects</h1>
+            <p className="max-w-[720px] text-lg leading-8 text-muted-foreground">
+              Public-facing project summaries live here. Deep technical material, validation details, theory, and logs now live in the integrated documentation section.
+            </p>
+          </div>
+        </div>
       </SectionWrapper>
 
       <SectionWrapper className="pt-0">

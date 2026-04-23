@@ -8,8 +8,10 @@ import { SectionWrapper } from "@/components/layout/SectionWrapper"
 import { ProjectCard } from "@/components/cards/ProjectCard"
 import { CTA } from "@/components/blocks/CTA"
 
-import { featuredProjects, committees, tracks } from "@/lib/data"
-import { coreValues, labStats, missionPillars, visionStatements } from "@/lib/site-content"
+import { featuredProjects, committees } from "@/lib/data"
+import { coreValues, missionPillars, visionStatements } from "@/lib/site-content"
+import { getStats } from "@/lib/stats"
+import { getRoadmapTracks } from "@/lib/roadmap"
 import { cn } from "@/lib/utils"
 
 const linkButtonBase =
@@ -28,7 +30,7 @@ function TrackStatusIcon({ status }: { status?: string }) {
   return <Circle className="h-4 w-4 text-muted-foreground/30" />
 }
 
-function BuildStatusCard({ track }: { track: (typeof tracks)[0] }) {
+function BuildStatusCard({ track }: { track: import("@/types").Track }) {
   const currentWeek = track.weeks.find((w) => w.status === "in-progress")
   const completedCount = track.weeks.filter((w) => w.status === "completed").length
   const totalWeeks = track.weeks.length
@@ -105,9 +107,13 @@ function QuickStatCard({
   )
 }
 
+export const dynamic = "force-dynamic";
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
+  const labStats = getStats();
+  const tracks = getRoadmapTracks();
   return (
     <>
       <section className="relative flex min-h-[90vh] sm:min-h-screen w-full items-center justify-center overflow-hidden">
@@ -124,16 +130,16 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background backdrop-blur-[4px]"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-center px-4 text-center mx-auto max-w-4xl space-y-8 mt-16">
-          {/* <p className="text-xs font-semibold tracking-[0.3em] uppercase text-white animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-white animate-in fade-in slide-in-from-bottom-4 duration-700">
             Applied Engineering Research Lab
-          </p> */}
-          <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-7xl lg:text-[5.5rem] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150 fill-mode-both leading-[1.1]">
+          </p>
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-[5.5rem] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150 fill-mode-both leading-[1.1]">
             Build full-stack <br className="hidden sm:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-primary">engineering systems</span> from first principles.
           </h1>
           <p className="max-w-2xl text-lg leading-8 text-foreground/80 md:text-xl animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-both">
             AERL is where you derive equations, simulate systems, build real prototypes, and document the work well enough for the next team to extend.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-500 fill-mode-both mt-4">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-500 fill-mode-both mt-4 w-full sm:w-auto">
             <Link href="/projects" className={`${linkButtonLg} ${linkButtonDefault} bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(11,78,87,0.4)] hover:shadow-[0_0_30px_rgba(11,78,87,0.6)] border-0`}>
               Explore our projects <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
@@ -147,7 +153,7 @@ export default function Home() {
       </section>
 
       <SectionWrapper className="py-0">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {labStats.map((stat) => (
             <QuickStatCard key={stat.label} {...stat} />
           ))}

@@ -1,11 +1,15 @@
 import Image from "next/image"
 import { PageHeader } from "@/components/layout/PageHeader"
 import { SectionWrapper } from "@/components/layout/SectionWrapper"
-import { committeeModel, coreValues, labStats, leadershipTeam, missionPillars, technicalLeadOpenings, visionStatements } from "@/lib/site-content"
+import { committeeModel, coreValues, leadershipTeam, missionPillars, technicalLeadOpenings, visionStatements } from "@/lib/site-content"
+import { getStats } from "@/lib/stats"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
+export const dynamic = "force-dynamic";
+
 export default function AboutPage() {
+  const labStats = getStats();
   return (
     <>
       <SectionWrapper className="pb-8">
