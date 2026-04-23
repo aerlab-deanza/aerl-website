@@ -17,10 +17,10 @@ export default async function AdminPage() {
 
   if (adminAuth !== adminPassword) redirect("/admin/login");
 
-  const summary = getAnalytics();
-  const daily = getDailyStats(14);
-  const stats = getStats();
-  const roadmapTracks = getRoadmapTracks();
+  const summary = await getAnalytics();
+  const daily = await getDailyStats(14);
+  const stats = await getStats();
+  const roadmapTracks = await getRoadmapTracks();
 
   const today = new Date().toISOString().split("T")[0];
   const todaySessions = summary.days[today]?.sessions ?? {};

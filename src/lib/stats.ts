@@ -1,22 +1,19 @@
-import fs from "fs";
-import path from "path";
-import { labStats } from "./site-content";
+import { getRedis } from "./redis"
+import { labStats } from "./site-content"
 
-export type Stat = { label: string; value: string; description: string };
+export type Stat = { label: string; value: string; description: string }
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const STATS_FILE = path.join(DATA_DIR, "stats.json");
+const KEY = "aerl:stats"
 
-export function getStats(): Stat[] {
+export async function getStats(): Promise<Stat[]> {
   try {
-    if (!fs.existsSync(STATS_FILE)) return labStats.map((s) => ({ ...s }));
-    return JSON.parse(fs.readFileSync(STATS_FILE, "utf-8")) as Stat[];
+    const data = await getRedis().get<Stat[]>(KEY)
+    return data ?? labStats.map((s) => ({ ...s }))
   } catch {
-    return labStats.map((s) => ({ ...s }));
+    return labStats.map((s) => ({ ...s }))
   }
 }
 
-export function updateStats(stats: Stat[]): void {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(STATS_FILE, JSON.stringify(stats, null, 2));
+export async function updateStats(stats: Stat[]): Promise<void> {
+  await getRedis().set(KEY, stats)
 }

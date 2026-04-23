@@ -3,7 +3,7 @@ import { RoadmapClient } from "./RoadmapClient"
 
 export const dynamic = "force-dynamic"
 
-export default function RoadmapPage() {
-  const tracks = getRoadmapTracks()
+export default async function RoadmapPage() {
+  const tracks = await getRoadmapTracks()
   return <RoadmapClient tracks={tracks} />
 }

@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   if (!isAdmin(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  return NextResponse.json(getStats());
+  return NextResponse.json(await getStats());
 }
 
 export async function PUT(request: NextRequest) {
@@ -28,7 +28,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
-  updateStats(stats);
+  await updateStats(stats);
   revalidatePath("/");
   revalidatePath("/about");
 
