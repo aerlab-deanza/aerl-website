@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { VisitTracker } from "@/components/VisitTracker";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="min-h-screen bg-background font-sans antialiased flex flex-col">
+        <VisitTracker />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

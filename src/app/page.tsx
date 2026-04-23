@@ -9,7 +9,8 @@ import { ProjectCard } from "@/components/cards/ProjectCard"
 import { CTA } from "@/components/blocks/CTA"
 
 import { featuredProjects, committees, tracks } from "@/lib/data"
-import { coreValues, labStats, missionPillars, visionStatements } from "@/lib/site-content"
+import { coreValues, missionPillars, visionStatements } from "@/lib/site-content"
+import { getStats } from "@/lib/stats"
 import { cn } from "@/lib/utils"
 
 const linkButtonBase =
@@ -105,9 +106,12 @@ function QuickStatCard({
   )
 }
 
+export const dynamic = "force-dynamic";
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function Home() {
+  const labStats = getStats();
   return (
     <>
       <section className="relative flex min-h-[90vh] sm:min-h-screen w-full items-center justify-center overflow-hidden">
@@ -124,9 +128,9 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/50 to-background backdrop-blur-[4px]"></div>
 
         <div className="relative z-10 flex flex-col items-center justify-center px-4 text-center mx-auto max-w-4xl space-y-8 mt-16">
-          {/* <p className="text-xs font-semibold tracking-[0.3em] uppercase text-white animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <p className="text-xs font-semibold tracking-[0.3em] uppercase text-white animate-in fade-in slide-in-from-bottom-4 duration-700">
             Applied Engineering Research Lab
-          </p> */}
+          </p>
           <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-7xl lg:text-[5.5rem] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150 fill-mode-both leading-[1.1]">
             Build full-stack <br className="hidden sm:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-primary">engineering systems</span> from first principles.
           </h1>

@@ -57,12 +57,12 @@ export function Navbar() {
               )}>
                 {siteConfig.shortName}
               </span>
-              <span className={cn(
+              {/* <span className={cn(
                 "block font-medium uppercase tracking-[0.24em] transition-colors duration-700 ease-in-out",
                 isScrolled ? "text-[8px] text-[#0a2e15]/70 hidden sm:block" : "text-[10px] text-muted-foreground"
               )}>
                 Applied Engineering Research Lab
-              </span>
+              </span> */}
             </div>
           </Link>
         </div>
