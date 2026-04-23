@@ -8,9 +8,10 @@ import { SectionWrapper } from "@/components/layout/SectionWrapper"
 import { ProjectCard } from "@/components/cards/ProjectCard"
 import { CTA } from "@/components/blocks/CTA"
 
-import { featuredProjects, committees, tracks } from "@/lib/data"
+import { featuredProjects, committees } from "@/lib/data"
 import { coreValues, missionPillars, visionStatements } from "@/lib/site-content"
 import { getStats } from "@/lib/stats"
+import { getRoadmapTracks } from "@/lib/roadmap"
 import { cn } from "@/lib/utils"
 
 const linkButtonBase =
@@ -29,7 +30,7 @@ function TrackStatusIcon({ status }: { status?: string }) {
   return <Circle className="h-4 w-4 text-muted-foreground/30" />
 }
 
-function BuildStatusCard({ track }: { track: (typeof tracks)[0] }) {
+function BuildStatusCard({ track }: { track: import("@/types").Track }) {
   const currentWeek = track.weeks.find((w) => w.status === "in-progress")
   const completedCount = track.weeks.filter((w) => w.status === "completed").length
   const totalWeeks = track.weeks.length
@@ -112,6 +113,7 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   const labStats = getStats();
+  const tracks = getRoadmapTracks();
   return (
     <>
       <section className="relative flex min-h-[90vh] sm:min-h-screen w-full items-center justify-center overflow-hidden">
