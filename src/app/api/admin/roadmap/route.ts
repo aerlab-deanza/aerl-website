@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
   if (!isAdmin(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  return NextResponse.json(getRoadmapTracks());
+  return NextResponse.json(await getRoadmapTracks());
 }
 
 export async function PUT(request: NextRequest) {
@@ -26,7 +26,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
-  updateRoadmapTracks(tracks);
+  await updateRoadmapTracks(tracks);
   revalidatePath("/roadmap");
 
   return NextResponse.json({ ok: true });

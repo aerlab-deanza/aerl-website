@@ -8,8 +8,8 @@ import { ArrowRight } from "lucide-react"
 
 export const dynamic = "force-dynamic";
 
-export default function AboutPage() {
-  const labStats = getStats();
+export default async function AboutPage() {
+  const labStats = await getStats();
   return (
     <>
       <SectionWrapper className="pb-8">

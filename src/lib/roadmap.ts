@@ -1,21 +1,18 @@
-import fs from "fs";
-import path from "path";
-import { tracks as defaultTracks } from "./data";
-import type { Track } from "@/types";
+import { getRedis } from "./redis"
+import { tracks as defaultTracks } from "./data"
+import type { Track } from "@/types"
 
-const DATA_DIR = path.join(process.cwd(), "data");
-const ROADMAP_FILE = path.join(DATA_DIR, "roadmap.json");
+const KEY = "aerl:roadmap"
 
-export function getRoadmapTracks(): Track[] {
+export async function getRoadmapTracks(): Promise<Track[]> {
   try {
-    if (!fs.existsSync(ROADMAP_FILE)) return defaultTracks.map((t) => ({ ...t }));
-    return JSON.parse(fs.readFileSync(ROADMAP_FILE, "utf-8")) as Track[];
+    const data = await getRedis().get<Track[]>(KEY)
+    return data ?? defaultTracks.map((t) => ({ ...t }))
   } catch {
-    return defaultTracks.map((t) => ({ ...t }));
+    return defaultTracks.map((t) => ({ ...t }))
   }
 }
 
-export function updateRoadmapTracks(tracks: Track[]): void {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(ROADMAP_FILE, JSON.stringify(tracks, null, 2));
+export async function updateRoadmapTracks(tracks: Track[]): Promise<void> {
+  await getRedis().set(KEY, tracks)
 }

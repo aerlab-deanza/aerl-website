@@ -1,6 +1,7 @@
 # AERL — Applied Engineering Research Lab
 
 The website for **AERL**, a student engineering lab at De Anza College.
+Live site: [aerl.netlify.app](https://aerl.netlify.app/)
 
 This site is the public face of the lab and the reference point for our current build cycle. It's built to be maintainable across student handoffs — the same standard we hold our engineering work to.
 
