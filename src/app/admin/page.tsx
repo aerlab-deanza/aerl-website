@@ -31,7 +31,7 @@ export default async function AdminPage() {
   return (
     <SectionWrapper className="py-12">
       {/* Page header */}
-      <div className="flex items-start justify-between mb-10">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-10">
         <div>
           <p className="text-xs font-semibold tracking-[0.2em] uppercase text-muted-foreground mb-1">
             Admin
@@ -47,7 +47,7 @@ export default async function AdminPage() {
       </div>
 
       {/* Stat cards */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 mb-8">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 sm:grid-cols-4 mb-8">
         <StatCard label="Total page views" value={summary.totalViews} />
         <StatCard label="Total unique visitors" value={summary.totalUniqueUsers} />
         <StatCard label="Views today" value={todayViews} accent />
@@ -55,11 +55,12 @@ export default async function AdminPage() {
       </div>
 
       {/* Bar chart */}
-      <div className="rounded-2xl border border-border bg-card p-6 mb-8">
+      <div className="rounded-2xl border border-border bg-card p-4 sm:p-6 mb-8">
         <p className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground mb-6">
           Page views — last 14 days
         </p>
-        <div className="flex items-end gap-1.5 h-40">
+        <div className="overflow-x-auto">
+        <div className="flex items-end gap-1.5 h-40 min-w-[300px]">
           {daily.map((d) => {
             const heightPct = (d.views / maxViews) * 100;
             const isToday = d.date === today;
@@ -100,6 +101,7 @@ export default async function AdminPage() {
             );
           })}
         </div>
+        </div>
 
         <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
@@ -114,22 +116,22 @@ export default async function AdminPage() {
       </div>
 
       {/* Daily table */}
-      <div className="rounded-2xl border border-border bg-card overflow-hidden">
-        <div className="px-6 py-4 border-b border-border">
+      <div className="rounded-2xl border border-border bg-card overflow-x-auto">
+        <div className="px-4 sm:px-6 py-4 border-b border-border">
           <p className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
             Daily breakdown
           </p>
         </div>
-        <table className="w-full text-sm">
+        <table className="w-full text-sm min-w-[420px]">
           <thead>
             <tr className="border-b border-border">
-              <th className="text-left px-6 py-3 text-xs font-medium text-muted-foreground">
+              <th className="text-left px-4 sm:px-6 py-3 text-xs font-medium text-muted-foreground">
                 Date
               </th>
-              <th className="text-right px-6 py-3 text-xs font-medium text-muted-foreground">
+              <th className="text-right px-4 sm:px-6 py-3 text-xs font-medium text-muted-foreground">
                 Page views
               </th>
-              <th className="text-right px-6 py-3 text-xs font-medium text-muted-foreground">
+              <th className="text-right px-4 sm:px-6 py-3 text-xs font-medium text-muted-foreground">
                 Unique visitors
               </th>
             </tr>
@@ -142,7 +144,7 @@ export default async function AdminPage() {
                   i % 2 !== 0 ? "bg-muted/10" : ""
                 } ${d.date === today ? "bg-primary/5" : ""}`}
               >
-                <td className="px-6 py-3 text-foreground tabular-nums">
+                <td className="px-4 sm:px-6 py-3 text-foreground tabular-nums">
                   {d.date}
                   {d.date === today && (
                     <span className="ml-2 text-[10px] font-medium text-primary uppercase tracking-wider">
@@ -150,10 +152,10 @@ export default async function AdminPage() {
                     </span>
                   )}
                 </td>
-                <td className="px-6 py-3 text-right text-foreground tabular-nums">
+                <td className="px-4 sm:px-6 py-3 text-right text-foreground tabular-nums">
                   {d.views}
                 </td>
-                <td className="px-6 py-3 text-right text-foreground tabular-nums">
+                <td className="px-4 sm:px-6 py-3 text-right text-foreground tabular-nums">
                   {d.uniqueUsers}
                 </td>
               </tr>
@@ -191,7 +193,7 @@ function StatCard({
       }`}
     >
       <p className="text-xs text-muted-foreground mb-2">{label}</p>
-      <p className="text-3xl font-semibold text-foreground tabular-nums">
+      <p className="text-2xl sm:text-3xl font-semibold text-foreground tabular-nums">
         {value.toLocaleString()}
       </p>
     </div>

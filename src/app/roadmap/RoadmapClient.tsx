@@ -201,10 +201,10 @@ function MilestoneCard({ week }: { week: Week }) {
     `}>
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-start gap-4 p-6 text-left group"
+        className="w-full flex items-start gap-3 sm:gap-4 p-4 sm:p-6 text-left group"
       >
-        <div className={`mt-0.5 shrink-0 flex h-11 w-11 items-center justify-center rounded-full ring-2 ${s.ring} bg-card transition-transform duration-200 group-hover:scale-105`}>
-          <s.Icon className={`h-5 w-5 ${s.dot}`} />
+        <div className={`mt-0.5 shrink-0 flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-full ring-2 ${s.ring} bg-card transition-transform duration-200 group-hover:scale-105`}>
+          <s.Icon className={`h-4 w-4 sm:h-5 sm:w-5 ${s.dot}`} />
         </div>
 
         <div className="flex-1 min-w-0 space-y-2">
@@ -243,7 +243,7 @@ function MilestoneCard({ week }: { week: Week }) {
             transition={{ duration: 0.15, ease: "easeInOut" }}
             style={{ overflow: "hidden" }}
           >
-            <div className="border-t border-border/40 px-6 pb-6 pt-5 space-y-5">
+            <div className="border-t border-border/40 px-4 sm:px-6 pb-4 sm:pb-6 pt-4 sm:pt-5 space-y-5">
               <div>
                 <p className="text-[11px] font-mono font-bold uppercase tracking-widest text-muted-foreground mb-3">
                   Tasks
@@ -425,45 +425,28 @@ export function RoadmapClient({ tracks }: { tracks: Track[] }) {
         <div className="space-y-8">
 
           {/* Track switcher */}
-          <div className="flex items-center gap-2">
-            <div className="flex gap-1.5 p-1 rounded-xl bg-muted/40 border border-border/40 w-fit">
-              {tracks.map((t, i) => {
-                const Icon = getTrackIcon(i)
-                return (
-                  <button
-                    key={t.id}
-                    onClick={() => setActiveTrack(t.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150
-                      ${activeTrack === t.id
-                        ? "bg-card text-foreground shadow-sm border border-border/60"
-                        : "text-muted-foreground hover:text-foreground"
-                      }`}
-                  >
-                    <Icon className="h-4 w-4" />
-                    <span className="hidden sm:inline">{t.name}</span>
-                    <span className="sm:hidden">{String.fromCharCode(65 + i)}</span>
-                  </button>
-                )
-              })}
-            </div>
-
-            {/* Legend */}
-            <div className="hidden md:flex items-center gap-4 ml-auto text-xs text-muted-foreground">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Completed
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5 text-amber-400" /> In Progress
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Circle className="h-3.5 w-3.5 text-muted-foreground/30" /> Pending
-              </span>
-              <span className="text-muted-foreground/40 italic text-[11px]">Click any card to expand</span>
-            </div>
+          <div className="flex gap-1.5 p-1 rounded-xl bg-muted/40 border border-border/40 w-full">
+            {tracks.map((t, i) => {
+              const Icon = getTrackIcon(i)
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => setActiveTrack(t.id)}
+                  className={`flex flex-1 items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-150
+                    ${activeTrack === t.id
+                      ? "bg-card text-foreground shadow-sm border border-border/60"
+                      : "text-muted-foreground hover:text-foreground"
+                    }`}
+                >
+                  <Icon className="h-4 w-4 shrink-0" />
+                  {t.name}
+                </button>
+              )
+            })}
           </div>
 
           {/* Track content */}
-          <div className="max-w-3xl">
+          <div className="w-full">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTrack}

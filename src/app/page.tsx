@@ -133,13 +133,13 @@ export default function Home() {
           <p className="text-xs font-semibold tracking-[0.3em] uppercase text-white animate-in fade-in slide-in-from-bottom-4 duration-700">
             Applied Engineering Research Lab
           </p>
-          <h1 className="font-heading text-5xl font-bold tracking-tight text-foreground sm:text-7xl lg:text-[5.5rem] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150 fill-mode-both leading-[1.1]">
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-[5.5rem] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150 fill-mode-both leading-[1.1]">
             Build full-stack <br className="hidden sm:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-primary">engineering systems</span> from first principles.
           </h1>
           <p className="max-w-2xl text-lg leading-8 text-foreground/80 md:text-xl animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300 fill-mode-both">
             AERL is where you derive equations, simulate systems, build real prototypes, and document the work well enough for the next team to extend.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-500 fill-mode-both mt-4">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-500 fill-mode-both mt-4 w-full sm:w-auto">
             <Link href="/projects" className={`${linkButtonLg} ${linkButtonDefault} bg-primary hover:bg-primary/90 text-white shadow-[0_0_20px_rgba(11,78,87,0.4)] hover:shadow-[0_0_30px_rgba(11,78,87,0.6)] border-0`}>
               Explore our projects <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
@@ -153,7 +153,7 @@ export default function Home() {
       </section>
 
       <SectionWrapper className="py-0">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {labStats.map((stat) => (
             <QuickStatCard key={stat.label} {...stat} />
           ))}

@@ -37,7 +37,7 @@ export function StatsEditor({ initial }: { initial: Stat[] }) {
 
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden">
-      <div className="px-6 py-4 border-b border-border flex items-center justify-between gap-3">
+      <div className="px-4 sm:px-6 py-4 border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <p className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
             Site statistics
@@ -67,7 +67,7 @@ export function StatsEditor({ initial }: { initial: Stat[] }) {
 
       <div className="divide-y divide-border">
         {stats.map((stat, i) => (
-          <div key={stat.label} className="px-6 py-5 grid gap-3 sm:grid-cols-[140px_1fr_2fr]">
+          <div key={stat.label} className="px-4 sm:px-6 py-5 grid gap-3 sm:grid-cols-[140px_1fr_2fr]">
             <div className="flex items-start pt-1">
               <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
                 {stat.label}

@@ -433,7 +433,7 @@ export function RoadmapEditor({ initial }: { initial: Track[] }) {
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden">
       {/* Header */}
-      <div className="px-6 py-4 border-b border-border flex items-center justify-between gap-4">
+      <div className="px-4 sm:px-6 py-4 border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <p className="text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
             Roadmap

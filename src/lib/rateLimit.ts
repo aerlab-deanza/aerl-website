@@ -1,7 +1,7 @@
 const store = new Map<string, number[]>();
 
 const WINDOW_MS = 60 * 60 * 1000; // 1 hour
-const MAX_REQUESTS = 3;
+const MAX_REQUESTS = 100;
 
 export function checkRateLimit(ip: string): { allowed: boolean; retryAfterSeconds: number } {
   const now = Date.now();

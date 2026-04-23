@@ -80,10 +80,12 @@ export default function JoinPage() {
     setStatus("submitting")
     setErrorMsg("")
 
+    const areaLabel = contributionAreas.find(a => a.id === form.area || a.label === form.area)?.label || form.area;
+
     const res = await fetch("/api/join", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, area: areaLabel }),
     })
 
     if (res.ok) {
@@ -106,9 +108,9 @@ export default function JoinPage() {
       </SectionWrapper>
 
       <SectionWrapper className="pt-0">
-        <div className="grid gap-14 md:grid-cols-2">
-          {/* Left column */}
-          <div className="space-y-10">
+        <div className="grid gap-10 md:gap-14 md:grid-cols-2">
+          {/* Left column — info (shown second on mobile, first on desktop) */}
+          <div className="space-y-10 order-2 md:order-1">
             <div className="space-y-3">
               <h3 className="text-2xl font-bold tracking-tight">Who We&apos;re Looking For</h3>
               <p className="text-muted-foreground leading-relaxed">
@@ -181,15 +183,15 @@ export default function JoinPage() {
                 <p>
                   GitHub:{" "}
                   <a className="text-primary hover:underline" href={siteConfig.links.github} target="_blank" rel="noreferrer">
-                    github.com/aerl-deanza
+                    github.com/aerlab-deanza
                   </a>
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Right column — form */}
-          <div className="rounded-xl border bg-card text-card-foreground p-6 shadow-sm flex flex-col">
+          {/* Right column — form (shown first on mobile) */}
+          <div className="rounded-xl border bg-card text-card-foreground p-5 sm:p-6 shadow-sm flex flex-col order-1 md:order-2">
             <h3 className="font-semibold text-xl mb-6">Application</h3>
 
             {status === "success" ? (
@@ -274,7 +276,7 @@ export default function JoinPage() {
                   >
                     <option value="" disabled>Select an area</option>
                     {contributionAreas.map((area) => (
-                      <option key={area.id} value={area.id}>{area.label}</option>
+                      <option key={area.id} value={area.label}>{area.label}</option>
                     ))}
                   </select>
                 </div>
