@@ -4,8 +4,9 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, ArrowUpRight } from "lucide-react"
+import { Menu, X, ArrowUpRight, Sun, Moon } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useTheme } from "next-themes"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -14,6 +15,13 @@ export function Navbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = React.useState(false)
   const [isScrolled, setIsScrolled] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
+
+  React.useEffect(() => { setMounted(true) }, [])
+
+  const isDark = !mounted || resolvedTheme === "dark"
+  const toggleTheme = () => setTheme(isDark ? "light" : "dark")
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 40)
@@ -40,7 +48,9 @@ export function Navbar() {
           className={cn(
             "pointer-events-auto flex items-center justify-between transition-all duration-1000 ease-in-out overflow-hidden",
             isScrolled
-              ? "mt-4 h-14 w-[95%] max-w-5xl rounded-full border border-white/20 bg-gradient-to-r from-[#f5f7f3]/95 to-[#e6ece1]/95 px-3 md:px-5 shadow-[0_10px_40px_rgba(0,0,0,0.4)] backdrop-blur-xl text-black"
+              ? isDark
+                ? "mt-4 h-14 w-[95%] max-w-5xl rounded-full border border-white/10 bg-gradient-to-r from-[#0a101d]/97 to-[#0f172a]/97 px-3 md:px-5 shadow-[0_8px_32px_rgba(0,0,0,0.45)] backdrop-blur-xl text-foreground"
+                : "mt-4 h-14 w-[95%] max-w-5xl rounded-full border border-white/20 bg-gradient-to-r from-[#f5f7f3]/95 to-[#e6ece1]/95 px-3 md:px-5 shadow-[0_8px_32px_rgba(0,0,0,0.10)] backdrop-blur-xl text-black"
               : "mt-4 h-14 w-full max-w-7xl px-4 md:px-8 bg-transparent text-foreground"
           )}
         >
@@ -61,7 +71,7 @@ export function Navbar() {
               </div>
               <span className={cn(
                 "block font-heading font-bold tracking-[0.22em] transition-colors duration-700 ease-in-out",
-                isScrolled ? "text-sm text-[#0a2e15]" : "text-lg text-foreground"
+                isScrolled ? (isDark ? "text-sm text-foreground" : "text-sm text-[#0a2e15]") : "text-lg text-foreground"
               )}>
                 {siteConfig.shortName}
               </span>
@@ -79,7 +89,9 @@ export function Navbar() {
                   className={cn(
                     "rounded-full px-3 py-1.5 text-sm transition-all duration-500 ease-in-out",
                     isScrolled
-                      ? active ? "bg-[#0b4e57]/10 text-[#0b4e57] font-bold" : "text-[#0a2e15]/70 hover:bg-[#0b4e57]/5 hover:text-[#0b4e57]"
+                      ? isDark
+                        ? active ? "bg-white/10 text-foreground font-bold" : "text-foreground/60 hover:bg-white/8 hover:text-foreground"
+                        : active ? "bg-[#0b4e57]/10 text-[#0b4e57] font-bold" : "text-[#0a2e15]/70 hover:bg-[#0b4e57]/5 hover:text-[#0b4e57]"
                       : active ? "bg-[var(--nav-active)] text-[var(--nav-active-foreground)] shadow-sm" : "text-foreground/80 hover:bg-[var(--nav-hover)] hover:text-foreground"
                   )}
                 >
@@ -90,13 +102,34 @@ export function Navbar() {
           </nav>
 
           {/* Desktop Join + mobile hamburger */}
-          <div className="flex flex-1 items-center justify-end space-x-4">
+          <div className="flex flex-1 items-center justify-end space-x-2">
+            {/* Theme toggle — desktop */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className={cn(
+                "hidden md:inline-flex h-9 w-9 items-center justify-center rounded-full transition-all duration-500 ease-in-out",
+                isScrolled
+                  ? isDark
+                    ? "text-foreground/70 hover:bg-white/10 hover:text-foreground"
+                    : "text-[#0a2e15]/60 hover:bg-black/5 hover:text-[#0a2e15]"
+                  : "text-foreground/70 hover:bg-[var(--nav-hover)] hover:text-foreground"
+              )}
+            >
+              {mounted
+                ? isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />
+                : <span className="h-4 w-4" />
+              }
+            </button>
+
             <Link
               href="/join"
               className={cn(
                 "hidden md:inline-flex items-center justify-center rounded-full text-sm font-semibold transition-all duration-500 ease-in-out shadow-sm",
                 isScrolled
-                  ? "h-9 px-5 bg-[#142e18] text-white hover:bg-[#0c1d0f] hover:shadow-md hover:-translate-y-0.5"
+                  ? isDark
+                    ? "h-9 px-5 bg-primary text-primary-foreground hover:bg-primary/85 hover:shadow-md hover:-translate-y-0.5"
+                    : "h-9 px-5 bg-[#142e18] text-white hover:bg-[#0c1d0f] hover:shadow-md hover:-translate-y-0.5"
                   : "h-9 px-5 bg-card text-foreground border border-border/40 hover:bg-card/80 hover:-translate-y-0.5"
               )}
             >
@@ -108,7 +141,9 @@ export function Navbar() {
               aria-label="Open navigation"
               className={cn(
                 "inline-flex h-9 w-9 items-center justify-center rounded-lg transition-colors focus-visible:outline-none md:hidden",
-                isScrolled ? "text-[#0a2e15] hover:bg-black/5" : "text-foreground hover:bg-[var(--nav-hover)]"
+                isScrolled
+                  ? isDark ? "text-foreground hover:bg-white/8" : "text-[#0a2e15] hover:bg-black/5"
+                  : "text-foreground hover:bg-[var(--nav-hover)]"
               )}
             >
               <Menu className="h-5 w-5" />
@@ -129,7 +164,7 @@ export function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="fixed inset-0 z-50 md:hidden"
-              style={{ backgroundColor: "rgba(5,5,16,0.96)" }}
+              style={{ backgroundColor: isDark ? "rgba(5,5,16,0.98)" : "rgba(245,247,243,0.98)" }}
             />
 
             {/* Panel — slides up from bottom edge */}
@@ -191,16 +226,31 @@ export function Navbar() {
                   </div>
                 </Link>
 
-                <motion.button
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.15, duration: 0.2, ease: "easeOut" }}
-                  onClick={() => setIsOpen(false)}
-                  aria-label="Close navigation"
-                  className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/40 bg-muted/30 text-muted-foreground transition-all hover:bg-muted/60 hover:text-foreground hover:border-border/70 active:scale-95"
-                >
-                  <X className="h-[18px] w-[18px]" />
-                </motion.button>
+                <div className="flex items-center gap-2">
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1, duration: 0.2, ease: "easeOut" }}
+                    onClick={toggleTheme}
+                    aria-label="Toggle theme"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/40 bg-muted/30 text-muted-foreground transition-all hover:bg-muted/60 hover:text-foreground hover:border-border/70 active:scale-95"
+                  >
+                    {mounted
+                      ? isDark ? <Sun className="h-[16px] w-[16px]" /> : <Moon className="h-[16px] w-[16px]" />
+                      : <span className="h-4 w-4" />
+                    }
+                  </motion.button>
+                  <motion.button
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.15, duration: 0.2, ease: "easeOut" }}
+                    onClick={() => setIsOpen(false)}
+                    aria-label="Close navigation"
+                    className="flex h-9 w-9 items-center justify-center rounded-xl border border-border/40 bg-muted/30 text-muted-foreground transition-all hover:bg-muted/60 hover:text-foreground hover:border-border/70 active:scale-95"
+                  >
+                    <X className="h-[18px] w-[18px]" />
+                  </motion.button>
+                </div>
               </div>
 
               {/* Divider */}
@@ -355,7 +405,7 @@ export function Navbar() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.3 }}
                 className="relative border-t shrink-0 px-6 py-3.5"
-                style={{ borderColor: "rgba(30,41,59,0.6)" }}
+                style={{ borderColor: isDark ? "rgba(30,41,59,0.6)" : "rgba(13,31,12,0.1)" }}
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-[8.5px] uppercase tracking-[0.2em] text-muted-foreground/30">

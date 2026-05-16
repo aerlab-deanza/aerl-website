@@ -19,7 +19,7 @@ export function Footer() {
           <div>
             <p className="font-heading text-lg font-bold text-foreground">{siteConfig.shortName}</p>
             <p className="max-w-xl text-sm leading-6 text-muted-foreground">
-              Student-led engineering research at De Anza College. One public site, one documentation hub, and work built to survive handoff.
+              Student-led engineering research at De Anza College.
             </p>
           </div>
         </div>
