@@ -10,37 +10,28 @@ interface DayData {
   sessions: Record<string, string[]>
 }
 
-export interface AnalyticsData {
-  totalViews: number
-  totalUniqueUsers: number
+interface StoredData {
   days: Record<string, DayData>
 }
 
-const KEY = "aerl:analytics"
-const EMPTY: AnalyticsData = { totalViews: 0, totalUniqueUsers: 0, days: {} }
-
-function isNewShape(data: AnalyticsData): boolean {
-  return Object.values(data.days).every(
-    (d) => !Array.isArray((d as unknown as Record<string, unknown>).sessions)
-  )
+export interface AnalyticsData extends StoredData {
+  totalViews: number
+  totalUniqueUsers: number
 }
 
-async function readData(): Promise<AnalyticsData> {
+const KEY = "aerl:analytics"
+
+async function readData(): Promise<StoredData> {
   try {
-    const data = await getRedis().get<AnalyticsData>(KEY)
-    if (!data) return { ...EMPTY, days: {} }
-    if (!isNewShape(data)) {
-      const fresh = { ...EMPTY, days: {} }
-      await getRedis().set(KEY, fresh)
-      return fresh
-    }
-    return data
+    const data = await getRedis().get<Record<string, unknown>>(KEY)
+    if (!data || typeof data.days !== "object" || !data.days) return { days: {} }
+    return { days: data.days as Record<string, DayData> }
   } catch {
-    return { ...EMPTY, days: {} }
+    return { days: {} }
   }
 }
 
-async function writeData(data: AnalyticsData): Promise<void> {
+async function writeData(data: StoredData): Promise<void> {
   await getRedis().set(KEY, data)
 }
 
@@ -55,16 +46,22 @@ export async function trackVisit(sessionId: string, pathname: string): Promise<v
 
   if (visited.includes(pathname)) return
 
-  const isNewSession = visited.length === 0
   day.sessions[sessionId] = [...visited, pathname]
-  data.totalViews++
-  if (isNewSession) data.totalUniqueUsers++
 
   await writeData(data)
 }
 
 export async function getAnalytics(): Promise<AnalyticsData> {
-  return readData()
+  const data = await readData()
+  const allSessions = new Set<string>()
+  let totalViews = 0
+  for (const day of Object.values(data.days)) {
+    for (const [sessionId, paths] of Object.entries(day.sessions)) {
+      allSessions.add(sessionId)
+      totalViews += paths.length
+    }
+  }
+  return { ...data, totalViews, totalUniqueUsers: allSessions.size }
 }
 
 export async function getDailyStats(days = 14): Promise<DayStats[]> {
