@@ -1,21 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { getStats, updateStats, type Stat } from "@/lib/stats";
-
-function isAdmin(request: NextRequest) {
-  const adminPassword = process.env.ADMIN_PASSWORD ?? "admin123";
-  return request.cookies.get("admin_auth")?.value === adminPassword;
-}
+import { isAdmin } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
-  if (!isAdmin(request)) {
+  if (!(await isAdmin(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   return NextResponse.json(await getStats());
 }
 
 export async function PUT(request: NextRequest) {
-  if (!isAdmin(request)) {
+  if (!(await isAdmin(request))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

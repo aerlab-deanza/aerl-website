@@ -7,15 +7,15 @@ import { SectionWrapper } from "@/components/layout/SectionWrapper";
 import { AdminLogout } from "./AdminLogout";
 import { StatsEditor } from "./StatsEditor";
 import { RoadmapEditor } from "./RoadmapEditor";
+import { isAdminToken } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   const cookieStore = await cookies();
-  const adminAuth = cookieStore.get("admin_auth")?.value;
-  const adminPassword = process.env.ADMIN_PASSWORD ?? "admin123";
+  const token = cookieStore.get("admin_auth")?.value;
 
-  if (adminAuth !== adminPassword) redirect("/admin/login");
+  if (!(await isAdminToken(token))) redirect("/admin/login");
 
   const summary = await getAnalytics();
   const daily = await getDailyStats(14);
